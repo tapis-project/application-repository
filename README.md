@@ -1,6 +1,5 @@
 # application-repository
-This repository serves to house applications ("apps") that can be run on TACC hardware via Tapis v3 job submissions.
-<br></br>
+This repository serves to house applications that can be run on TACC hardware via Tapis v3 job submissions.
 
 There is a folder for each app containing the following:
 * A README file that discusses how to use the app and any particular changes that may be necessary in the app's definition.

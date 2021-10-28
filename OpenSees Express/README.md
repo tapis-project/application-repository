@@ -66,6 +66,5 @@ If the user has multiple files to pass in, this can be done in the job submissio
     ]
 }
 ```
-<br></br>
 
 Read the [Tapis jobs documentation](https://tapis.readthedocs.io/en/latest/technical/jobs.html#fileinputs) for more information on file inputs.
