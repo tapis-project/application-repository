@@ -1,6 +1,7 @@
 # Jupyter Notebook HPC
 
-This is an HPC version of [Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable/). The app runs on a single Stampede2 or Frontera compute node (depending on which supercomputer is specified in the Tapis system being used by the app). <br></br>
+This is an HPC version of [Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable/). The app runs on a single Stampede2 or Frontera compute node (depending on which supercomputer is specified in the Tapis system being used by the app).
+<br><br>
 
 
 ## Details
@@ -12,14 +13,15 @@ During job runtime, Tapis produces an output file which contains:
 * The URL for the Notebook session
 * The password needed to log into the session
 
-The user can view the output file's contents while the job is still running to get the URL and password. After copy-pasting the URL into the browser and providing the login password, the user can interact with Jupyter Notebook as normal until the job is manually stopped or it exceeds the maximum job runtime as specified in the app definition. <br></br>
+The user can view the output file's contents while the job is still running to get the URL and password. After copy-pasting the URL into the browser and providing the login password, the user can interact with Jupyter Notebook as normal until the job is manually stopped or it exceeds the maximum job runtime as specified in the app definition.
+<br><br>
 
 
-## Using the Jupyter HPC App
+## Using the Jupyter Notebook HPC app
 
-Use the _app_definition.json_ file as a reference for creating the Jupyter HPC app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
+Use the _app_definition.json_ file as a reference for creating the **Jupyter Notebook HPC** app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
-If the user wants to use a specific system to run the app rather than a shared system, they can add an "execSystemId" key-value pair under the "jobAttributes" object. For example:
+To run the app on a specified system instead of a publicly shared one, users can add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
 
 ```
 {
@@ -36,6 +38,6 @@ If the user wants to use a specific system to run the app rather than a shared s
 <br>
 
 
-## Stopping a Jupyter Notebook HPC session
+## Stopping a **Jupyter Notebook HPC** session
 
-If the user wants to stop a Jupyter Notebook HPC session, they can delete the "delete_me_to_end_session" file located in the mounted directory. Deleting this file will interrupt the Jupyter kernel and cause the Tapis job to end.
+To stop a **Jupyter Notebook HPC session**, the user can delete the "delete_me_to_end_session" file located in the mounted directory. Deleting this file will interrupt the Jupyter kernel and cause the Tapis job to end.

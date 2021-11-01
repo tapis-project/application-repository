@@ -17,7 +17,7 @@
         },
         "fileInputs": [
             {
-                "sourceUrl": "tapis://<SYSTEM_NAME>/<MAIN_TCL_FILE>.tcl",
+                "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<DEFAULT_TCL_FILE>.tcl",
                 "targetPath": "input.tcl",
                 "inPlace": false,
                 "meta": {

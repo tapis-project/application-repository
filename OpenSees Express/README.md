@@ -1,18 +1,20 @@
 # OpenSees Express
 
-OpenSees Express is a sequential version of the OpenSees application, rather than a parallelized one. See the [OpenSees documentation](https://opensees.berkeley.edu/wiki/index.php/OpenSees_User) for more information. <br></br>
+**OpenSees Express** is a sequential version of the OpenSees application, rather than a parallelized one. See the [OpenSees documentation](https://opensees.berkeley.edu/wiki/index.php/OpenSees_User) for more information. 
+<br><br>
 
 
 ## Details
 
-OpenSees Express is non-interactive. Once a job using this app has been submitted, the input files provided in the app definition (TCL, raw data, etc.) are staged and the main TCL file is executed. The resulting output can be found in the app definition output directory. <br></br>
+**OpenSees Express** is non-interactive. Once a job using this app has been submitted, the input files provided in the app definition (TCL, raw data, etc.) are staged and the main TCL file is executed. The resulting output can be found in the app definition output directory. 
+<br><br>
 
 
 ## Using the OpenSees Express app
 
-Use the _app_definition.json_ file as a reference for creating the OpenSees Express app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
+Use the _app_definition.json_ file as a reference for creating the **OpenSees Express** app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
-If the user wants to use a specific system to run the app rather than a shared system, they can add an "execSystemId" key-value pair under the "jobAttributes" object. For example:
+To run the app on a specified system instead of a publicly shared one, users can add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
 
 ```
 {
@@ -23,8 +25,11 @@ If the user wants to use a specific system to run the app rather than a shared s
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
         ...
 }
-```
+``` 
 <br>
+
+If using a job definition template, be sure to replace the "<SYSTEM_NAME_HERE>" and <FILE> values with a specific system and file paths as appropriate!
+<br><br> 
 
 
 ## Handling input files
@@ -37,7 +42,6 @@ If the user has multiple files to pass in, this can be done in the job submissio
 * The main input file *must* follow the same syntax as that provided in the app definition.
 * If a job submission request contains a main file different from that provided in the app definition, it will override the app definition file.
 * Any additional files added in the job submission request do not have to exist in the app definition already.
-<br></br>
 
 ```
 {
@@ -66,5 +70,6 @@ If the user has multiple files to pass in, this can be done in the job submissio
     ]
 }
 ```
+<br>
 
 Read the [Tapis jobs documentation](https://tapis.readthedocs.io/en/latest/technical/jobs.html#fileinputs) for more information on file inputs.
