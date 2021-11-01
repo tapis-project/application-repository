@@ -28,7 +28,7 @@ To run the app on a specified system instead of a publicly shared one, users can
 ``` 
 <br>
 
-If using a job definition template, be sure to replace the "<SYSTEM_NAME_HERE>" and <FILE> values with a specific system and file paths as appropriate!
+If using a job definition template, be sure to replace the "<SYSTEM_NAME_HERE>" and "<FILE>" values with a specific system and file paths as appropriate!
 <br><br> 
 
 
