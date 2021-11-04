@@ -1,11 +1,11 @@
 {
     "id": "jupyter-notebook-hpc",
     "version": "1",
-    "appType": "FORK",
+    "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
+    "appType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
-    "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
-    "containerImage": "tylerclemens/jupyter-v3:latest",
+    "containerImage": "docker://tylerclemens/jupyter-v3:latest",
     "jobAttributes": {
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
