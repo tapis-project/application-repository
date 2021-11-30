@@ -11,19 +11,16 @@
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
         "parameterSet": {
             "appArgs": [
-                {"arg": "OpenSees"},
-                {"arg": "/TapisInput/input.tcl"}
+                {"name": "mainProgram", "arg": "OpenSees"},
+                {"name": "input1", "arg": "/TapisInput/input.tcl"}
             ] 
         },
         "fileInputs": [
             {
+                "name": "TCL_input",
+                "inputMode": "REQUIRED",
                 "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<DEFAULT_TCL_FILE>.tcl",
-                "targetPath": "input.tcl",
-                "inPlace": false,
-                "meta": {
-                    "name": "TCL_input",
-                    "required": true
-                }
+                "targetPath": "input.tcl"
             }
         ]
     }
