@@ -1,18 +1,18 @@
 # OpenSees Express
 
-**OpenSees Express** is a sequential version of the OpenSees application, rather than a parallelized one. See the [OpenSees documentation](https://opensees.berkeley.edu/wiki/index.php/OpenSees_User) for more information. 
+OpenSees Express is a sequential version of the OpenSees application, rather than a parallelized one. See the [OpenSees documentation](https://opensees.berkeley.edu/wiki/index.php/OpenSees_User) for more information. 
 <br><br>
 
 
 ## Details
 
-**OpenSees Express** is non-interactive. Once a job using this app has been submitted, the input files provided in the app definition (TCL, raw data, etc.) are staged and the main TCL file is executed. The resulting output can be found in the app definition output directory. 
+OpenSees Express is non-interactive. Once a job using this app has been submitted, the input files provided in the app definition (TCL, raw data, etc.) are staged and the main TCL file is executed. The resulting output can be found in the app definition output directory. 
 <br><br>
 
 
 ## Using the OpenSees Express app
 
-Use the _app_definition.json_ file as a reference for creating the **OpenSees Express** app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
+Use the _app_definition.json_ file as a reference for creating the OpenSees Express app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
 To run the app on a specified system instead of a publicly shared one, users can add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
 

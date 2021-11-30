@@ -1,6 +1,6 @@
 # Details
 
-This folder contains the Dockerfile used to build the image associated with the **Jupyter Notebook HPC** app, along with the files needed by the container to run.
+This folder contains the Dockerfile used to build the image associated with the Jupyter Notebook HPC app, along with the files needed by the container to run.
 
 To build the image for local testing, download this folder and navigate to it on the command line, then run the command ```docker build -f Dockerfile -t <NAME_OF_IMAGE> .```
 <br><br>
@@ -8,7 +8,7 @@ To build the image for local testing, download this folder and navigate to it on
 
 ## Dockerfile
 
-The image is built upon Jupyter's official base-notebook image, which is itself based on Ubuntu Linux.
+The image is built upon Jupyter's official _base-notebook_ image, which is itself based on Ubuntu Linux.
 <br><br>
 
 
