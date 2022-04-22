@@ -2,7 +2,7 @@
     "id": "img-classify",
     "version": "0.1",
     "description": "An image classifier run using Singularity in batch mode.",
-    "appType": "BATCH",
+    "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
     "containerImage": "docker://tapis/img-classify:0.1",
