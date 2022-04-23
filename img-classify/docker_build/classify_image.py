@@ -153,10 +153,14 @@ def run_inference_on_image(image):
     node_lookup = NodeLookup()
 
     top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
+    # Print output to screen and write to file
+    f = open("/TapisOutput/output.txt", "a")
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
       print('%s (score = %.5f)' % (human_string, score))
+      f.write('%s (score = %.5f)' % (human_string, score))
+    f.close()
 
 
 def maybe_download_and_extract():
