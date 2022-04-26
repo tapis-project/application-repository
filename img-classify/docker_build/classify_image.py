@@ -158,8 +158,8 @@ def run_inference_on_image(image):
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
-      print('%s (score = %.5f)' % (human_string, score))
-      f.write('%s (score = %.5f)' % (human_string, score))
+      print('%s (score = %.5f)\n' % (human_string, score))
+      f.write('%s (score = %.5f)\n' % (human_string, score))
     f.close()
 
 
