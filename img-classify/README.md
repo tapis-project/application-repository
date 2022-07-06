@@ -1,13 +1,15 @@
 # img-classify
 
-This is an application that performs image classification using Tensorflow on HPC hardware. It was demonstrated in a [tutorial](https://github.com/TACC-Cloud/gateways21-portable-computing-cloud-hpc) presented by TACC at the SCGI Gateways 2021 conference. 
-<br><br>
-
+This is an application that performs image classification using Tensorflow on HPC hardware.
+It was demonstrated as part of a tutorial presented by TACC at the SCGI Gateways 2021 conference.
+More information about the tutorial can be found
+[here](https://github.com/TACC-Cloud/pearc22-portable-computing-cloud-hpc/releases/tag/gateways21-portable-computing-cloud-hpc)
 
 ## Details
 
-The img-classify application is non-interactive. Once a job using this app has been submitted, the input files provided in the job submission body are automatically staged and classifcation is performed. The output can be found in the output directory specified in the application definition ("execSystemOutputDir"). 
-<br><br>
+The img-classify application is non-interactive. Once a job using this app has been submitted, the input files provided
+in the job submission body are automatically staged and classification is performed.
+The output can be found in the output directory specified in the application definition ("execSystemOutputDir").
 
 
 ## Using the img-classify application
@@ -28,7 +30,6 @@ To run the application on a specified system instead of a publicly shared one, u
         ...
 }
 ```
-<br>
 
 If using the job definition template, be sure to replace the "execSystemId" with a specific system (or remove it entirely) and change the "--account" to a specific allocation!
 <br><br> 
