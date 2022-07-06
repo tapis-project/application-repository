@@ -1,6 +1,6 @@
 {
     "name": "img-classify-job",
-    "appId": "img-classify",
+    "appId": "<username>-img-classify",
     "appVersion": "0.1",
     "execSystemId": "<SYSTEM_NAME_HERE>",
     "parameterSet": {
@@ -17,7 +17,7 @@
                 "arg": "--tapis-profile tacc"
             },
             {
-                "arg": "--account <ACCOUNT_ALLOCATION_HERE>"
+                "arg": "--account <ACCOUNT_ALLOCATION>"
             }
         ]
     }
