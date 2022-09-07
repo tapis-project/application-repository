@@ -2,7 +2,7 @@
     "id": "jupyter-notebook-hpc",
     "version": "1",
     "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
-    "appType": "BATCH",
+    "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
     "containerImage": "docker://tylerclemens/jupyter-v3:latest",
