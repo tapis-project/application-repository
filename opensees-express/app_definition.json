@@ -1,7 +1,7 @@
 {
     "id": "opensees-express",
     "version": "1",
-    "appType": "FORK",
+    "jobType": "BATCH",
     "runtime": "DOCKER",
     "description": "A reference application for running OpenSees Express in Tapis v3.",
     "containerImage": "stevemock/docker-opensees:latest",
