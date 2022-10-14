@@ -1,6 +1,6 @@
 {
-    "name": "opensees-express-default-input-override",
-    "appId": "opensees-express",
+    "name": "opensees-express-default-input-override-<username>",
+    "appId": "opensees-express-singularity-<username>",
     "appVersion": "1",
     "fileInputs": [
         {

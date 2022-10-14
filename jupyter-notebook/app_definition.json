@@ -1,5 +1,5 @@
 {
-    "id": "jupyter-notebook-hpc",
+    "id": "jupyter-notebook-hpc-kprice3",
     "version": "1",
     "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
     "jobType": "BATCH",

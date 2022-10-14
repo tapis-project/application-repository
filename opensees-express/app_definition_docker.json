@@ -1,7 +1,7 @@
 {
-    "id": "opensees-express",
+    "id": "opensees-express-<username>",
     "version": "1",
-    "appType": "FORK",
+    "jobType": "BATCH",
     "runtime": "DOCKER",
     "description": "A reference application for running OpenSees Express in Tapis v3.",
     "containerImage": "stevemock/docker-opensees:latest",
@@ -19,7 +19,7 @@
             {
                 "name": "TCL_input",
                 "inputMode": "REQUIRED",
-                "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<DEFAULT_TCL_FILE>.tcl",
+                "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<NEW_TCL_FILE>.tcl",
                 "targetPath": "input.tcl"
             }
         ]

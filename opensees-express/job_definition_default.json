@@ -1,6 +1,6 @@
 {
     "name": "opensees-express-job",
-    "appId": "opensees-express",
+    "appId": "opensees-express-singularity-<username>",
     "appVersion": "1",
-    "execSystemId": "<SYSTEM_NAME_HERE>"
+    "execSystemId": "<system id>"
 }

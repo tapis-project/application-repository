@@ -1,6 +1,24 @@
 {
     "name": "jupyter-notebook-hpc-job",
-    "appId": "jupyter-notebook-hpc",
+    "appId": "jupyter-notebook-hpc-<username>",
     "appVersion": "1",
-    "execSystemId": "<SYSTEM_NAME_HERE>"
+    "execSystemId": "<system id>",
+    "parameterSet": {
+        "schedulerOptions": [
+            { 
+                "name": "chargeProject",
+                "description": "which project to charge",
+                "include": true,
+                "arg": "-A TACC-ACI-CIC"
+    
+            },
+            {
+                "name": "profile",
+                "description": "which scheduler profile to use",
+                "include": true,
+                "arg": "--tapis-profile tacc"
+            }
+        ]
+
+    }
 }

@@ -29,7 +29,14 @@ To run the app on a specified system instead of a publicly shared one, users can
 <br>
 
 If using a job definition template, be sure to replace the "<SYSTEM_NAME_HERE>" and "<XXX_FILE>" values with a specific system and file paths as appropriate!
+
+<br>
+
+# Switching between Docker and Singularity runtimes
+The jobs are set to use the singularity runtime by default. If you've registered the Docker runtime app using `app_definition_docker.json`, you'll need to make sure to switch the `"appId": "opensees-express-singularity-<username>",` line in the job definition file to `"appId": "opensees-express-docker-<username>",`
 <br><br> 
+
+
 
 
 ## Handling input files
