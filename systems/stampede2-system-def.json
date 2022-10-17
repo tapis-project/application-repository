@@ -13,7 +13,7 @@
 	"canExec": true,
 	"canRunBatch": true,
 	"mpiCmd": "string",
-	"jobRuntimes": [ { "runtimeType": "SINGULARITY" } ],	"jobWorkingDir": "string",
+	"jobRuntimes": [ { "runtimeType": "SINGULARITY" } ],
 	"jobWorkingDir": "HOST_EVAL($SCRATCH)",
 	"jobMaxJobs": 12000,
 	"jobMaxJobsPerUser": -1,
