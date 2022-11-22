@@ -1,6 +1,6 @@
 {
     "name": "opensees-express-multiple-file-inputs",
-    "appId": "opensees-express",
+    "appId": "opensees-express-singularity-<username>",
     "appVersion": "1",
     "fileInputs": [
         {
