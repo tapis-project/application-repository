@@ -8,20 +8,22 @@
     "containerImage": "docker://stevemock/docker-opensees:latest",
     "jobAttributes": {
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
-        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
         "parameterSet": {
             "appArgs": [
-                {"name": "mainProgram", "arg": "OpenSees"},
-                {"name": "input1", "arg": "/TapisInput/input.tcl"}
+                {"name": "mainProgram", "arg": "OpenSees", "inputMode": "FIXED"},
+                {"name": "inputRedirection", "arg": "<", "inputMode": "FIXED"},
+                {"name": "input1", "arg": "/TapisInput/input_dir/Example.tcl", "inputMode": "REQUIRED"}
             ] 
         },
         "fileInputs": [
             {
-                "name": "TCL_input",
+                "name": "TCL_input_directory",
                 "inputMode": "REQUIRED",
-                "sourceUrl": "tapis://<SYSTEM_NAME_HERE>/<NEW_TCL_FILE>.tcl",
-                "targetPath": "input.tcl"
+                "sourceUrl": "tapis://S2-test-testuser2/scratch/05278/ajamthe/OpenSees/EXAMPLES/SmallSP",
+                "targetPath": "input_dir",
+                "description": "TCL input directory that includes the tcl script as well as any other required files."
             }
         ]
     }

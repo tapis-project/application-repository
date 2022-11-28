@@ -1,0 +1,19 @@
+{
+    "name":"opensees_sp_job",
+    "description":"opensees_sp_job",
+    "appId":"<app-id>",
+    "appVersion": "<app-version>",
+    "execSystemId": "<exec-system-id>",
+    "parameterSet": {
+        "schedulerOptions": [
+            { "arg": "<allocation>" }
+        ],
+          "appArgs": [
+       {"arg": "input_dir/Example.tcl","name":"input1"}
+     ]
+    },
+    "fileInputs":[
+        { "sourceUrl":"tapis://<system-id-input-dir-located>/<path to folder where tcl file is present>", 
+          "targetPath":"input_dir","name": "TCL_input_directory"}
+        ]
+}
