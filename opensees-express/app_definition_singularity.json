@@ -22,7 +22,7 @@
                 "name": "TCL_input_directory",
                 "inputMode": "REQUIRED",
                 "sourceUrl": "tapis://S2-test-testuser2/scratch/05278/ajamthe/OpenSees/EXAMPLES/SmallSP",
-                "targetPath": "input_dir",
+                "targetPath": ".",
                 "description": "TCL input directory that includes the tcl script as well as any other required files."
             }
         ]
