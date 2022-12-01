@@ -1,0 +1,30 @@
+{
+    "id": "opensees-express-singularity-mp-<userid>",
+    "version": "1",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "description": "A reference application for running OpenSees Express in Tapis v3.",
+    "containerImage": "docker://tapis/opensees-mp:3.4.0",
+    "jobAttributes": {
+        "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "parameterSet": {
+            "appArgs": [
+                {"name": "mainProgram", "arg": "OpenSeesMP", "inputMode": "FIXED"},
+                {"name": "inputRedirection", "arg": "<", "inputMode": "FIXED"},
+                {"name": "input1", "arg": "/TapisInput/input_dir/Example.tcl", "inputMode": "REQUIRED"}
+            ] 
+        },
+        "fileInputs": [
+            {
+                "name": "TCL_input_directory",
+                "inputMode": "REQUIRED",
+                "sourceUrl": "tapis://<system-id>/<pathto/OpenSees/EXAMPLES/SmallMP>",
+                "targetPath": ".",
+                "description": "TCL input directory that includes the tcl script as well as any other required files."
+            }
+        ]
+    }
+}
