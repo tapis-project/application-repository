@@ -10,6 +10,8 @@
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "isMpi": True,
+        "mpiCmd": "mpirun",
         "parameterSet": {
             "appArgs": [
                 {"name": "mainProgram", "arg": "OpenSeesMP", "inputMode": "FIXED"},
