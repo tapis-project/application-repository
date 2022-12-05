@@ -5,6 +5,8 @@
     "appVersion": "<app-version>",
     "execSystemId": "<exec-system-id>",
     "nodeCount":2,
+    "archiveOnAppError":true,
+    "maxMinutes":60,
     "parameterSet": {
         "schedulerOptions": [
             { "arg": "<allocation>" }
