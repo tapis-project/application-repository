@@ -10,7 +10,7 @@
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
-        "isMpi": True,
+        "isMpi": true,
         "mpiCmd": "mpirun",
         "parameterSet": {
             "appArgs": [
