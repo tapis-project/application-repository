@@ -7,12 +7,13 @@ USER root
 ENV HOMEDIR=/home/tapis
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update && apt-get -y install ssh vim sendmail
+RUN apt-get -y install curl
 
 # As a root user, set up the environment, including a directory we have access to.
 # Then switch away from root to a newly created user which uses the listed homedir.
 RUN useradd -m tapis
 
-ADD "get_port.py" "run_jupyter.sh" $HOMEDIR
+ADD "get_port.py" "run_jupyter.sh" "send_email.py" $HOMEDIR
 RUN chown -R tapis:tapis $HOMEDIR
 
 # The user is switched back to the one from set in the base image.
