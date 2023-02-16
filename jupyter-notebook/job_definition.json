@@ -1,15 +1,21 @@
 {
-    "name": "jupyter-notebook-hpc-job",
+    "name": "tap_jupyter-notebook-hpc-job",
     "appId": "jupyter-notebook-hpc-<username>",
     "appVersion": "1",
     "execSystemId": "<system id>",
     "parameterSet": {
+        "envVariables": [
+            {
+                "key": "email",
+                "value":"<email>"
+            }
+        ],
         "schedulerOptions": [
             { 
                 "name": "chargeProject",
                 "description": "which project to charge",
                 "include": true,
-                "arg": "-A TACC-ACI-CIC"
+                "arg": "-A TACC-ACI"
     
             },
             {

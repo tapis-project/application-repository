@@ -5,11 +5,33 @@
     "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
-    "containerImage": "docker://tylerclemens/jupyter-v3:latest",
+    "containerImage": "docker://gcurbelo/tap_jupyter-app:dev",
     "jobAttributes": {
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
-        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
-        "maxMinutes": 60 
+        "maxMinutes": 60,
+        "parameterSet": {
+            "containerArgs": [
+                {
+                    "name": "mount",
+                    "description": "share mount",
+                    "inputMode": "FIXED",
+                    "arg": "--bind /share"
+                }
+            ],
+            "envVariables": [
+                {"key": "email"}
+            ]
+        },
+        "fileInputs": [
+            {
+                "name": "Jupyter_input_directory",
+                "inputMode": "OPTIONAL",
+                "sourceUrl": "<path_to_source",
+                "targetPath": "./Files",
+                "description": "Input directory that includes an example notebook."
+            }
+        ]
     }
 }
