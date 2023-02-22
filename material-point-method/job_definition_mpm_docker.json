@@ -1,0 +1,6 @@
+{
+    "name": "mpm docker job",
+    "appId": "mpm-docker",
+    "appVersion": "0.1.0",
+    "execSystemId": ""
+}
