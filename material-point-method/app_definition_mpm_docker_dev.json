@@ -1,13 +1,12 @@
 {
-    "app_id": "mpm-docker",
+    "id": "mpm-docker",
     "version": "dev",
     "jobType": "FORK",
     "runtime": "DOCKER",
     "description": "High-Performance Material Point Method (CB-Geo mpm) DEVELOPMENT version.",
     "containerImage": "tapis/mpm:dev",
     "jobAttributes": {
-        "isMpi": true,
-        "mpiCmd": "mpirun",
+        "isMpi": false,
         "parameterSet": {
             "appArgs": [
                 {"name": "directoryInputFlag", "arg": "-f", "inputMode": "FIXED"},
