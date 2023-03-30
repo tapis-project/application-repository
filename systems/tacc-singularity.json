@@ -1,0 +1,15 @@
+{
+    "name": "tacc-singularity",
+    "description": "Default TACC Singularity Scheduler Profile",
+    "moduleSpec": [
+        {
+            "modulesToLoad": [
+                "tacc-singularity"
+            ],
+            "moduleLoadCommand": "module load"
+        }
+    ],
+    "hiddenOptions": [
+        "MEM"
+    ]
+}
