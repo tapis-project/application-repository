@@ -1,0 +1,17 @@
+# Image: jstubbs/alpaca
+# Run with: 
+#   docker run -v $(pwd)/output:/TapisOutput jstubbs/alpaca
+
+from python:3.10
+
+RUN git clone https://github.com/tatsu-lab/stanford_alpaca.git /app
+RUN pip install -r /app/requirements.txt
+
+RUN apt-get update && apt-get install -y vim
+
+RUN mkdir /TapisOutput
+
+ADD entry.sh /app/entry.sh
+RUN chmod +x /app/entry.sh
+
+ENTRYPOINT ["/app/entry.sh"]
