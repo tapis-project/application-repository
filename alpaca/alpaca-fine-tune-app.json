@@ -1,0 +1,118 @@
+{
+    "id": "alpaca-fine-tune-opt",
+    "version": "0.1.0",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "description": "Fine tuning application based on the Alpaca method utilizing the OPT model. The general approach utilizes torchrun to execute a train.py script which accepts attributes as described in the documentation (https://pytorch.org/docs/stable/elastic/run.html)",
+    "containerImage": "docker://jstubbs/alpaca:0.1.0",
+    "jobAttributes": {
+        "isMpi": false,
+        "parameterSet": {
+            "appArgs": [
+                {
+                    "name": "HUGGINGFACE_HUB_CACHE", 
+                    "description": "Path to use for the Huggingface cache. NOTE: This path should be a directory with sufficient disk quota, as models will be downloaded to this path.",
+                    "inputMode": "REQUIRED"
+                },
+                {
+                    "name": "nproc_per_node",
+                    "description": "Number of processors per node",
+                    "inputMode": "REQUIRED",
+                    "arg": "4"
+                },
+                {
+                    "name": "model_name",
+                    "description": "The name of LLM to be used in the fine tuning. This should be resolvable on the Huggingface Hub. By default, we use OPT-6.7b from Facebook.",
+                    "inputMode": "REQUIRED",
+                    "arg": "facebook/opt-6.7b"
+                },
+                {
+                    "name": "num_train_epochs",
+                    "description": "Number of training rounds to perform",
+                    "inputMode": "REQUIRED",
+                    "arg": "3"
+                },
+                {
+                    "name": "per_device_train_batch_size",
+                    "description": "Batch size per GPU/TPU core/CPU for training.",
+                    "inputMode": "REQUIRED",
+                    "arg": "4"
+                },
+                {
+                    "name": "per_device_eval_batch_size",
+                    "description": "Batch size per GPU/TPU core/CPU for evaluation.",
+                    "inputMode": "REQUIRED",
+                    "arg": "4"
+                },
+                {
+                    "name": "gradient_accumulation_steps",
+                    "description": "Number of updates steps to accumulate before performing a backward/update pass.",
+                    "inputMode": "REQUIRED",
+                    "arg": "8"
+                },
+                {
+                    "name": "evaluation_strategy",
+                    "description": "The evaluation strategy to use.",
+                    "inputMode": "REQUIRED",
+                    "arg": "no"
+                },
+                {
+                    "name": "save_strategy",
+                    "description": "The checkpoint save strategy to use.",
+                    "inputMode": "REQUIRED",
+                    "arg": "steps"
+                },
+                {
+                    "name": "save_steps",
+                    "description": "Save checkpoint every X updates steps. Should be an integer or a float in range `[0,1)`. If smaller than 1, will be interpreted as ratio of total training steps.",
+                    "inputMode": "REQUIRED",
+                    "arg": "2000"
+                },
+                {
+                    "name": "save_total_limit",
+                    "description": "Limit the total amount of checkpoints. Deletes the older checkpoints in the output_dir. Specify an empty string for unlimited checkpoints",
+                    "inputMode": "REQUIRED",
+                    "arg": "1"
+                },
+                {
+                    "name": "learning_rate",
+                    "description": "The initial learning rate.",
+                    "inputMode": "REQUIRED",
+                    "arg": "2e-5"
+                },
+                {
+                    "name": "weight_decay",
+                    "description": "The weight decay to apply (if not zero) to all layers except all bias and LayerNorm weights.",
+                    "inputMode": "REQUIRED",
+                    "arg": "0."
+                },
+                {
+                    "name": "warmup_ratio",
+                    "description": "Ratio of total training steps used for a linear warmup from 0 to `learning_rate`.",
+                    "inputMode": "REQUIRED",
+                    "arg": "0.03"
+                },
+                {
+                    "name": "lr_scheduler_type",
+                    "description": "The scheduler type to use.",
+                    "inputMode": "REQUIRED",
+                    "arg": "cosine"
+                },
+                {
+                    "name": "logging_steps",
+                    "description": "Log every X updates steps. Should be an integer or a float in range `[0,1)`. If smaller than 1, will be interpreted as ratio of total training steps.",
+                    "inputMode": "REQUIRED",
+                    "arg": "1"
+                },
+                {
+                    "name": "fsdp",
+                    "description": "Whether or not to use PyTorch Fully Sharded Data Parallel (FSDP) training.",
+                    "inputMode": "REQUIRED",
+                    "arg": "full_shard auto_wrap"
+                }
+
+            ]
+        }
+    }
+}
