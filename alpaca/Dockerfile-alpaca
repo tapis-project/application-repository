@@ -21,6 +21,8 @@ RUN  poetry config virtualenvs.create false \
 
 # add Standford Alpaca
 ADD stanford_alpaca/* /app/
+ADD stanford_alpaca/configs /app/configs
+ADD stanford_alpaca/assets /app/assets
 
 WORKDIR /
 # Create output directory for Tapis

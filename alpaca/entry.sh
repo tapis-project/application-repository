@@ -21,7 +21,4 @@ torchrun --nproc_per_node=$2 --master_port=54321 train.py \
     --learning_rate ${12} \
     --weight_decay ${13} \
     --warmup_ratio ${14} \
-    --lr_scheduler_type "${15}" \
-    --logging_steps ${16} \
-    --fsdp "${17}" \
-    --fsdp_transformer_layer_cls_to_wrap 'OPTDecoderLayer' \
+    --deepspeed "./configs/default_offload_opt_param.json"
