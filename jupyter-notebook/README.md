@@ -21,7 +21,7 @@ The user can view the output file's contents while the job is still running to g
 
 Use the _app_definition.json_ file as a reference for creating the jupyter-notebook app. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
-To run the app on a specified system instead of a publicly shared one, users can add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
+The application definition may be updated to run the app on a specific system by default. Simply add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
 
 ```
 {

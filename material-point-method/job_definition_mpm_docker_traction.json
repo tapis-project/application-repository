@@ -1,0 +1,9 @@
+{
+    "name": "mpm docker traction job",
+    "appId": "mpm-docker",
+    "appVersion": "dev",
+    "execSystemId": "",
+    "appArgs": {
+        "directoryInput": "./benchmarks/2d/uniaxial_traction/"
+    }
+}

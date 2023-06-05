@@ -1,0 +1,35 @@
+# Image: jstubbs/alpaca
+# Run with: 
+#   docker run -v $(pwd)/output:/TapisOutput jstubbs/alpaca
+
+from python:3.10
+
+# install vim 
+RUN apt-get update && apt-get install -y vim
+
+# set poetry version
+ENV POETRY_VERSION=1.4.0
+# install poetry
+RUN pip install "poetry==$POETRY_VERSION"
+
+# create app dir and install dependencies
+RUN mkdir /app
+COPY pyproject.toml poetry.lock /app/
+WORKDIR /app
+RUN  poetry config virtualenvs.create false \
+  && poetry install --no-interaction --no-ansi
+
+# add Standford Alpaca
+ADD stanford_alpaca/* /app/
+ADD stanford_alpaca/configs /app/configs
+ADD stanford_alpaca/assets /app/assets
+
+WORKDIR /
+# Create output directory for Tapis
+RUN mkdir /TapisOutput
+
+# add entry script
+ADD entry.sh /app/entry.sh
+RUN chmod +x /app/entry.sh
+
+ENTRYPOINT ["/app/entry.sh"]

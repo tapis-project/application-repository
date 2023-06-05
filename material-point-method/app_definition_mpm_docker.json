@@ -1,0 +1,26 @@
+{
+    "id": "mpm-docker",
+    "version": "0.1.0",
+    "jobType": "FORK",
+    "runtime": "DOCKER",
+    "description": "High-Performance Material Point Method (CB-Geo mpm)",
+    "containerImage": "tapis/mpm:0.1.0",
+    "jobAttributes": {
+        "isMpi": false,
+        "parameterSet": {
+            "appArgs": [
+                {"name": "directoryInputFlag", "arg": "-f", "inputMode": "FIXED"},
+                {"name": "directoryInput", "arg": "/home/cbgeo/research/mpm-benchmarks/2d/uniaxial_stress/", "inputMode": "REQUIRED"}
+            ] 
+        },
+        "fileInputs": [
+            {
+                "name": "directoryInput",
+                "inputMode": "OPTIONAL",
+                "targetPath": ".",
+                "description": "Input directory that contains the MPM congiguration file as well as any other required files. Note that to utilize this attribute one must also set the directoryInput parameter to mbe the value of the name of the directory. Also note that if this directory is not provided, a default (included in the appliation container image) will be used."
+            }
+        ]
+    }
+
+}

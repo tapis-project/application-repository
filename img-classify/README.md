@@ -1,20 +1,26 @@
 # img-classify
 
-This is an application that performs image classification using Tensorflow on HPC hardware. It was demonstrated in a [tutorial](https://github.com/TACC-Cloud/gateways21-portable-computing-cloud-hpc) presented by TACC at the SCGI Gateways 2021 conference. 
-<br><br>
-
+This is an application that performs image classification using Tensorflow on HPC hardware.
+It was demonstrated as part of a tutorial presented by TACC at the SCGI Gateways 2021 conference.
+More information about the tutorial can be found
+[here](https://github.com/TACC-Cloud/pearc22-portable-computing-cloud-hpc/releases/tag/gateways21-portable-computing-cloud-hpc)
 
 ## Details
 
-The img-classify application is non-interactive. Once a job using this app has been submitted, the input files provided in the job submission body are automatically staged and classifcation is performed. The output can be found in the output directory specified in the application definition ("execSystemOutputDir"). 
-<br><br>
-
+The img-classify application is non-interactive. Once a job using this app has been submitted, the input files provided
+in the job submission body are automatically staged and classification is performed.
+The output can be found in the output directory specified in the application definition (*execSystemOutputDir*).
 
 ## Using the img-classify application
 
-Use the _app_definition.json_ file as a reference for creating the img-classify application. Simply download the file or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
+Use the _app_definition.json_ file as a reference for creating the img-classify application. Simply download the file
+or copy its contents and [create the app](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
-To run the application on a specified system instead of a publicly shared one, users can add an "execSystemId" key-value pair under the "jobAttributes" field in the app definition:
+Note that an application id must be unique, so in general it is a good idea to use a naming scheme likely to result
+in a unique id. For example, it is common to include a username as part of the id.
+
+To run the application on a specific system instead of a publicly shared one, users can add the *execSystemId*
+attribute under the *jobAttributes* section in the app definition:
 
 ```
 {
@@ -28,15 +34,17 @@ To run the application on a specified system instead of a publicly shared one, u
         ...
 }
 ```
-<br>
 
-If using the job definition template, be sure to replace the "execSystemId" with a specific system (or remove it entirely) and change the "--account" to a specific allocation!
-<br><br> 
+If using the job definition template, be sure to replace the *execSystemId* with a specific system
+(or remove it entirely), update *appId* with the Id of the application you created and change the "--account" in
+*appArgs* to your specific account allocation.
 
 
 ## Handling input files
 
-Underneath the "jobAttributes" field in the job definition, there is a subfield called "parameterSet". Within "parameterSet" is yet another subfield called "appArgs" where the user can pass in images to be classified using two args: an "--image_file" flag and the image file path.
+Underneath the *jobAttributes* field in the job definition, there is a subfield called *parameterSet*.
+Within *parameterSet* is yet another subfield called *appArgs* where the user can pass in images to be classified
+using two args: an "--image_file" flag and the image file path.
 
 ```
 {

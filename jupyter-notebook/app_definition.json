@@ -1,15 +1,37 @@
 {
-    "id": "jupyter-notebook-hpc",
+    "id": "jupyter-notebook-hpc-<username>",
     "version": "1",
     "description": "A reference application for running an HPC version of Jupyter Notebook in Tapis v3. Runs interactively on a Stampede2 or Frontera compute node.",
-    "appType": "BATCH",
+    "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
-    "containerImage": "docker://tylerclemens/jupyter-v3:latest",
+    "containerImage": "docker://gcurbelo/tap_jupyter-app:dev",
     "jobAttributes": {
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
-        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}",
         "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
-        "maxMinutes": 60 
+        "maxMinutes": 60,
+        "parameterSet": {
+            "containerArgs": [
+                {
+                    "name": "mount",
+                    "description": "share mount",
+                    "inputMode": "FIXED",
+                    "arg": "--bind /share"
+                }
+            ],
+            "envVariables": [
+                {"key": "email"}
+            ]
+        },
+        "fileInputs": [
+            {
+                "name": "Jupyter_input_directory",
+                "inputMode": "OPTIONAL",
+                "sourceUrl": "<path_to_source",
+                "targetPath": "./Files",
+                "description": "Input directory that includes an example notebook."
+            }
+        ]
     }
 }
