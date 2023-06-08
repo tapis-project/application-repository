@@ -6,7 +6,7 @@ def analyze():
     """
     Function that analyzes the sentence that the user provided.
     """
-    returnAllScores = FLAGS.return_all_scores == 'True'
+    returnAllScores = FLAGS.return_all_scores != 'False'
     classifier = pipeline("sentiment-analysis", model="j-hartmann/emotion-english-distilroberta-base", return_all_scores=returnAllScores)
     print_results(classifier(FLAGS.sentence))
 
@@ -21,7 +21,7 @@ def print_results(results):
         print("There was no sentence to analyze.")
     else:
         print("The sentence: " + FLAGS.sentence)
-        if FLAGS.return_all_scores != 'True':
+        if FLAGS.return_all_scores == 'False':
             label = results[0]['label']
             score = results[0]['score']
             print(f'{label}: {score:.2%}')
