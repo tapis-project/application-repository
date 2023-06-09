@@ -1,10 +1,10 @@
 # Summarize-Text
 ## Text Summarization using HuggingFace Models
-A description of the fill-mask model can be found [here](https://huggingface.co/docs/transformers/tasks/summarization).
+A description of the text summarization model can be found [here](https://huggingface.co/docs/transformers/tasks/summarization).
 
 This is an application that performs the text summarization model in the HPC system.
 
-For example, the following arguments:
+For example, for the following arguments:
 ```
 {
     "name": "summarize-text",
