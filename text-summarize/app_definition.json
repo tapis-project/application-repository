@@ -1,0 +1,24 @@
+{
+    "id": "text-summarize",
+    "version": "0.1",
+    "description": "An text summarizer run in Singularity.",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://cyemparala/text-summarize:0.1",
+    "jobAttributes": {
+        "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "parameterSet": {
+            "appArgs": [
+             {"name": "arg1", "arg": "--url", "inputMode": "FIXED"},
+            ],
+            "archiveFilter": { "includeLaunchFiles": False }
+        },
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+}

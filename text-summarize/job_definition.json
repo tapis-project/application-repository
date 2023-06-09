@@ -1,0 +1,16 @@
+{
+    "name": "text-summarize-job",
+    "appId": "<username>-text-summarize",
+    "appVersion": "0.1",
+    "execSystemId": "<system name>",
+    "parameterSet": {
+        "appArgs": [
+            {
+                "arg": "--url"
+            },
+            {
+                "arg": "'https://text.npr.org/1180869821'"
+            }
+        ]
+    }
+}

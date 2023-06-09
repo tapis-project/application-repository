@@ -1,0 +1,12 @@
+# image: tapis/text-summarize-sing:0.1
+FROM huggingface/transformers-pytorch-cpu
+
+# Install necessary requirements
+RUN pip install requests
+RUN pip install lxml
+
+# Copy the app into the container
+ADD summarize-text.py /summarize-text.py
+
+# Note: Using ENTRYPOINT makes this run immediately in non-interactive mode.
+ENTRYPOINT ["python3", "/summarize-text.py"]
