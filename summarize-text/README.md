@@ -2,7 +2,7 @@
 ## Text Summarization using HuggingFace Models
 A description of the text summarization model can be found [here](https://huggingface.co/docs/transformers/tasks/summarization).
 
-This is an application that performs the text summarization model in the HPC system.
+This is an application that performs the text summarization model of a given text input, minimum and maximum length of summary.
 
 For example, for the following arguments:
 ```
