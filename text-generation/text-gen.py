@@ -1,10 +1,9 @@
-import json
+import sys, os
 from transformers import pipeline
 
 def gen_text(model_name: str, sentence: str, max_len: int, num_seq: int) -> list:
     '''
     Function to generate text from input sentence, using the TextGenerationPipeline from huggingface. 
-    
     Args:
         model_name (str): Text generation model name, please see: https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads
         sentence (str): The input sentence for text generation.
@@ -31,24 +30,52 @@ def gen_text(model_name: str, sentence: str, max_len: int, num_seq: int) -> list
 
     return (output_text)
 
-def main():
-    # prompt user for input
-    model_name = input('Specify text generation model: ')
-    sentence = input('Sentence prompt: ')
-    max_len = input('Maximum output length (int): ')
-    num_seq = input('Desired number of sequences to generate (int): ')
-
-    # run model
-    model_output = gen_text(model_name, sentence, max_len, num_seq)
-    results = {'text_output': model_output}
-
-    # write results into a json file
+def write_to_file(results: str, filename: str):
+    '''
+    Function writes results string into a file.
+    Args:
+        results (str): String to be written to a file.
+        filename (str): Destination file path for the results.
+    Returns:
+        None
+    '''
     try:
-        with open('text_output.json', 'w') as out:
-            json.dump(results, out, indent=2)
-        return 'Output file saved.'
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, 'w') as file:
+            file.write(results)
+        print("Output written to", filename)
+    except IOError:
+        print("Error writing to file", filename)
+
+def main():
+    # output file destination
+    directory = "text-generator"
+    filename = os.path.join(directory, "output.txt")
+
+    # get input
+    try:
+        model_name = sys.argv[1]
+        sentence = sys.argv[2]
+        max_len = sys.argv[3]
+        num_seq = sys.argv[4]
     except Exception as e:
-        return f'Error: {e}, Please check if your the model you input is compatible'
+        write_to_file(f'{e}\nNeed proper CLI inputs: <model_name>, <sentence>, <max_len> and <num_seq>\n', filename)
+        return e
+    
+    # run model and get results
+    model_output = gen_text(model_name, sentence, max_len, num_seq)
+    if type(model_output) == list:
+        results = ""
+        for i in model_output:
+            print(i["generated_text"])
+            results += str(i["generated_text"]) + '\n'
+    else:
+        results = str(model_output) + '\n'
+
+    write_to_file(results, filename)
+
+    with open(filename, 'r') as file:
+            print(file.read())
 
 if __name__ == "__main__":
     main()
