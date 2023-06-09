@@ -1,0 +1,20 @@
+{
+    "id": "<id>-sentiment-analysis",
+    "version": "0.2",
+    "description": "Application utilizing the sentiment analysis model from Hugging Face.",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://jaeestee/sentiment-analysis:0.2",
+    "jobAttributes": {
+        "parameterSet": {
+            "archiveFilter": { 
+                "includeLaunchFiles": false 
+            }
+        },
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+}
