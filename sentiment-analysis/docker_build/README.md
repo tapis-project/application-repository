@@ -34,6 +34,12 @@ There are multiple arguments built into this application. Here are your options:
 > joy,97.50%
 > ```
 
+Running the image using this command:
+```bash
+$ sudo python3 sentiment_analysis.py <arguments>
+```
+Will allow the results, in csv format, to be saved onto the machine. File name is `results.csv`.
+
 ## Pulling the image:
 To pull the existing image, run this command:
 ```bash
