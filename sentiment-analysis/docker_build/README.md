@@ -5,7 +5,7 @@ This folder can be used to build docker images in order to run `sentiment_analys
 - This python script contains all the necessary components to analyze any sentence that a user provides.
 
 # Docker Image Handling
-- This is assuming that docker is already installed on the system
+> This is assuming that docker is already installed on the system
 
 ## Running the image:
 To run the image, run this command:
