@@ -21,6 +21,9 @@ For example, for the following arguments:
             },
             {
                 "arg": "25"
+            },
+            {
+                "arg": "t5-base"
             }
         ]
     }
