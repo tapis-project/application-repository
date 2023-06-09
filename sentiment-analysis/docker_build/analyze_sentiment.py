@@ -1,4 +1,4 @@
-import argparse
+import argparse, csv
 from transformers import pipeline
 
 FLAGS = None
@@ -23,8 +23,12 @@ def analyze() -> list:
     if not FLAGS.model:
         analyzer = pipeline("sentiment-analysis", return_all_scores=returnAllScores)
     else:
-        analyzer = pipeline("sentiment-analysis", model=FLAGS.model, return_all_scores=returnAllScores)
-    
+        #try-except block to make sure that the model name given exists
+        try:
+            analyzer = pipeline("sentiment-analysis", model=FLAGS.model, return_all_scores=returnAllScores)
+        except Exception as e:
+            return "Error: Model does not exist." 
+
     results = analyzer(FLAGS.sentence)
 
     return results
@@ -37,23 +41,36 @@ def print_results(results: list):
         results (List): The results of the analysis.
     """
     #if there was no sentence provided, prints this message, else prints the results
-    if FLAGS.sentence == '':
-        print("There was no sentence to analyze.")
-    else:
-        print("The sentence: " + FLAGS.sentence)
-        if FLAGS.return_all_scores.lower() in ('false', 'f'):
-            label = results[0]['label']
-            score = results[0]['score']
-            print(f'{label}: {score:.2%}')
+    with open('results.csv', 'w') as file:
+        writer = csv.writer(file)
+
+        if FLAGS.sentence == '':
+            writer.writerow(["There was no sentence to analyze."])
         else:
-            for res in results[0]:
-                label = res['label']
-                score = res['score']
-                print(f'{label}: {score:.2%}')
+            writer.writerow(["The sentence", FLAGS.sentence])
+            if FLAGS.return_all_scores.lower() in ('false', 'f'):
+                label = results[0]['label']
+                score = results[0]['score']
+                writer.writerow([label, '{:.2%}'.format(score)])
+            else:
+                for res in results[0]:
+                    label = res['label']
+                    score = res['score']
+                    writer.writerow([label, '{:.2%}'.format(score)])
+        file.close()
 
 def main():
     results = analyze()
-    print_results(results)
+    if "Error" in results:
+        with open('results.csv', 'w') as file:
+            writer = csv.writer(file)
+            writer.writerow([results])
+            file.close()
+    else:
+        print_results(results)
+
+    with open('results.csv', 'r') as file:
+        print(file.read())
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
