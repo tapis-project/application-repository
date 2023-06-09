@@ -27,7 +27,7 @@ For example, for the following arguments:
 }
 ```
 
-It provides this output:
+The output is
 ```
 Output written to saved_outputs/summary.txt
 this website contains a collection of self-paced tutorials for learning how to incorporate Tapis into computational research workflows
