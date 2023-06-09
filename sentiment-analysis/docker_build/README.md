@@ -17,7 +17,10 @@ There are multiple arguments built into this application. Here are your options:
 |---|---|---|---|
 |sentence|The sentence to analyze. (Technically optional, but that's no fun)|Anything|--sentence='I love potatoes'|
 |model|Model to use. (Optional)|[Link](https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads)|--model='j-hartmann/emotion-english-distilroberta-base'|
-|return all scores|Choose to either return all or only one score. Anything other than f or false is considered as true. Capitalization does not matter. (Optional since the default is "True")|f, false, true|--return_all_scores='f'| 
+|return all scores|Choose to either return all or only one score. Anything other than f or false is considered as true. Capitalization does not matter. (Optional since the default is "True")|f, false, true|--return_all_scores='false'| 
+> Example of running the image with all arguments:
+> ```bash
+> $ docker run jaeestee/sentiment-analysis:0.2 --sentence='I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
 
 ## Pulling the image:
 To pull the existing image, run this command:
