@@ -54,10 +54,10 @@ def main():
 
     # get input
     try:
-        model_name = sys.argv[1]
-        sentence = sys.argv[2]
-        max_len = sys.argv[3]
-        num_seq = sys.argv[4]
+        model_name = sys.argv[0]
+        sentence = sys.argv[1]
+        max_len = sys.argv[2]
+        num_seq = sys.argv[3]
     except Exception as e:
         write_to_file(f'{e}\nNeed proper CLI inputs: <model_name>, <sentence>, <max_len> and <num_seq>\n', filename)
         return e
