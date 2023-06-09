@@ -21,6 +21,18 @@ There are multiple arguments built into this application. Here are your options:
 > Example of running the image with all arguments:
 > ```bash
 > $ docker run jaeestee/sentiment-analysis:0.2 --sentence='I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
+> ```
+> Output:
+> ```
+> Downloading: 100%|##########| 0.98k/0.98k [00:00<00:00, 1.21MB/s]
+> Downloading: 100%|##########| 313M/313M [00:04<00:00, 69.4MB/s] 
+> Downloading: 100%|##########| 294/294 [00:00<00:00, 574kB/s]
+> Downloading: 100%|##########| 780k/780k [00:00<00:00, 22.2MB/s]
+> Downloading: 100%|##########| 446k/446k [00:00<00:00, 4.60MB/s]
+> Downloading: 100%|##########| 1.29M/1.29M [00:00<00:00, 8.47MB/s]
+> Downloading: 100%|##########| 239/239 [00:00<00:00, 419kB/s]The sentence,I love potatoes
+> joy,97.50%
+> ```
 
 ## Pulling the image:
 To pull the existing image, run this command:
