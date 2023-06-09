@@ -13,10 +13,10 @@ def gen_text(model_name: str, sentence: str, max_len: int, num_seq: int) -> list
         output_text (list): Based on the sentence prompt, the model will auto-complete it by generating the remaining text in the text length and number of sequences specified.
     '''
     try:
-        max_num = int(max_len)
+        max_len = int(max_len)
         num_seq = int(num_seq)
     except Exception as e:
-        return f'Error: {e}. Please input integer for max_num and num_seq'
+        return f'Error: {e}. Please input integer for max_len and num_seq'
 
     try:
         generator = pipeline("text-generation", model=model_name) # tested using "distilgpt2"
@@ -54,10 +54,10 @@ def main():
 
     # get input
     try:
-        model_name = sys.argv[0]
-        sentence = sys.argv[1]
-        max_len = sys.argv[2]
-        num_seq = sys.argv[3]
+        model_name = sys.argv[1]
+        sentence = sys.argv[2]
+        max_len = int(sys.argv[3])
+        num_seq = int(sys.argv[4])
     except Exception as e:
         write_to_file(f'{e}\nNeed proper CLI inputs: <model_name>, <sentence>, <max_len> and <num_seq>\n', filename)
         return e
@@ -67,7 +67,7 @@ def main():
     if type(model_output) == list:
         results = ""
         for i in model_output:
-            print(i["generated_text"])
+            print(i)
             results += str(i["generated_text"]) + '\n'
     else:
         results = str(model_output) + '\n'
