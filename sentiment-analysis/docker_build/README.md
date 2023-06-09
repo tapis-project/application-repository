@@ -4,7 +4,7 @@ This folder can be used to build docker images in order to run `sentiment_analys
 ***analyze_sentiment.py***
 - This python script contains all the necessary components to analyze any sentence that a user provides.
 
-# Docker Image Handling
+# Docker Image Handling for `jaeestee/sentiment-analysis:02`
 > This is assuming that docker is already installed on the system.
 
 ## Running the image:
@@ -19,7 +19,7 @@ There are multiple arguments built into this application. Here are your options:
 |model|Model to use. (Optional)|[Link](https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads)|--model='j-hartmann/emotion-english-distilroberta-base'|
 |return all scores|Choose to either return all or only one score. Anything other than f or false is considered as true. Capitalization does not matter. (Optional since the default is "True")|f, false, true|--return_all_scores='f'| 
 
-## Pulling the image, `jaeestee/sentiment-analysis:02`, from Docker Hub:
+## Pulling the image:
 To pull the existing image, run this command:
 ```bash
 $ docker pull jaeestee/sentiment-analysis:0.2
