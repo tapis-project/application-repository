@@ -33,9 +33,9 @@ def analyze() -> list:
 
     return results
 
-def print_results(results: list):
+def store_results(results: list):
     """
-    Function that prints the results.
+    Function that stores the results into a csv file.
 
     Args:
         results (List): The results of the analysis.
@@ -67,7 +67,7 @@ def main():
             writer.writerow([results])
             file.close()
     else:
-        print_results(results)
+        store_results(results)
 
     with open('results.csv', 'r') as file:
         print(file.read())
