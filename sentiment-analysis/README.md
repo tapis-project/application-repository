@@ -54,3 +54,4 @@ This application is reliant on a job, therefore not interactive.
 }
 ```
 - Replace <id> with the same id used above. Replace <sentence>, <True/False>, and/or <Model> with proper values explained in the `README.md` in the `docker_build` directory. [Click here to get there faster.](https://github.com/jaeestee/application-repository/tree/main/sentiment-analysis/docker_build#running-the-image)
+- If certain arguments are not wanted, make the argument value empty. aka, leave it as `""`.
