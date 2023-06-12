@@ -5,9 +5,9 @@ A description of the text summarization model can be found [here](https://huggin
 This is an application that performs the text summarization model of a given text input, minimum and maximum length of summary.
 
 The application takes following argument:
-* First argument: Text that needs to be summarized. Use '' for text length greater than 1
-* Second argument: Mininum length of the summary
-* Third argument: Maxmium length of the summary
+* First argument (Required): Text that needs to be summarized. Use '' for text length greater than 1
+* Second argument (Required): Mininum length of the summary
+* Third argument (Required): Maxmium length of the summary
 * Fourth argument (Optional): Model name (default= 't5-base')
 
 For example, for the following arguments:
