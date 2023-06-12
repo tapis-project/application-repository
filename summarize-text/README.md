@@ -10,7 +10,7 @@ The application takes following argument:
 * Third argument (Required): Maxmium length of the summary
 * Fourth argument (Optional): Model name (default= 't5-base')
 
-The container image can be found here: "docker://prithuls/summarize-text:latest"
+Use this "docker://prithuls/summarize-text:latest" for the container image link.
 
 For example, for the following arguments:
 ```
