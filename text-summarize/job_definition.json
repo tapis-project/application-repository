@@ -10,6 +10,12 @@
             },
             {
                 "arg": "'https://text.npr.org/1180869821'"
+            },
+            {
+                "arg": "--model_name"
+            },
+            {
+                "arg": "'facebook/bart-large-cnn'"
             }
         ]
     }

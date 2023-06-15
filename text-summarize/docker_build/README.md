@@ -38,9 +38,10 @@ The images are built upon TensorFlow's official _tensorflow_ image, which is its
 ## classify_img.py
 
 The url to be processed is passed in through the command line using the _--url argument.
+The default model is facebook/bart-large-cnn. Another model can be passed via --model_name argument
 In order to test the application using the docker image, run a command similar to the following:
 
-```docker run <NAME_OF_IMAGE> --url=<url>```
+```docker run <NAME_OF_IMAGE> --url=<url> --model_name=<name_of_model>```
 
 For example:
 

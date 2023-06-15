@@ -1,5 +1,5 @@
 """Simple text summarization of news article.
-Model and pipline from https://huggingface.co/facebook/bart-large-cnn
+Model and pipline from https://huggingface.co/
 This program summarizes news article.
 Change the --url argument to a specific url in https://text.npr.org
 """
@@ -11,8 +11,8 @@ from lxml import html
 from transformers import pipeline
 import requests
 
-def run_summarize(url):
-  summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+def run_summarize(url, model_name):
+  summarizer = pipeline("summarization", model=model_name)
   page = requests.get(url)
   tree = html.fromstring(page.content)
 
@@ -29,6 +29,12 @@ if __name__ == '__main__':
       type=str,
       default='https://text.npr.org/1180869821',
       help='A url from the list in https://text.npr.org/'
+  )
+  parser.add_argument(
+      '--model_name',
+      type=str,
+      default='facebook/bart-large-cnn',
+      help='Name of the hugging face model from https://huggingface.co/'
   )  
   args = parser.parse_args()
-  run_summarize(args.url)
+  run_summarize(args.url, args.model_name)
