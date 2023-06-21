@@ -1,0 +1,46 @@
+{
+    "App_invvocation_example_1":
+    {
+        "parameterSet": {
+            "appArgs": [
+                {"arg": "--inputtype"},
+                {"arg": "samplelist"}
+            ],
+            "schedulerOptions": [
+                { "arg": "-A TACC-ACI-CIC" }
+            ]
+        }
+    },
+    "App_invvocation_example_2":
+    {
+        "parameterSet": {
+            "appArgs": [
+                {"arg": "--inputtype"},
+                {"arg": "pair"},
+                {"arg": "--imageurl"},
+                {"arg": "'http://images.cocodataset.org/val2017/000000039769.jpg'"},
+                {"arg": "--question"},
+                {"arg": "'How many cats in image?'"}
+            ],
+            "schedulerOptions": [
+                { "arg": "-A TACC-ACI-CIC" }
+            ]
+        }
+    },
+    "App_invvocation_example_3":
+    {
+        "parameterSet": {
+            "appArgs": [
+                {"arg": "--inputtype"},
+                {"arg": "pairlist"},
+                {"arg": "--imageurl"},
+                {"arg": "'http://images.cocodataset.org/val2017/000000039769.jpg'"},
+                {"arg": "--questionlist"},
+                {"arg": "\"['How many cats in image?', 'What animal is in the image?', 'What device is in the image?', 'How many devices?']\""}
+            ],
+            "schedulerOptions": [
+                { "arg": "-A TACC-ACI-CIC" }
+            ]
+        }
+    }
+}

@@ -1,0 +1,13 @@
+What is in the git:
+An application that does "visual question answering" by taking an image and a question as input and generates 
+an answer for the question based on the image.
+
+I will work on the following:
+1. Adding a read me files and commenting the code
+2, Currentlt it take an image and question pair, i want to add differnt kinds of input types
+    a. Image and list of questions to answer w.r.t image (like the original VQA task)
+    b. Input a csv with images and questions (the test file)
+3. The current image from huggingface/transformers-pytorchcpu(gpu) does not support piepline for vision-QA. I will try installing the depandiec from pyttorch image and see if I could get the pipeline version work.
+4. WIll try creating examples for GPU executions and not the diffeerce in execution time. 
+
+

@@ -1,0 +1,9 @@
+FROM huggingface/transformers-pytorch-cpu:4.18.0
+
+RUN pip3 install --no-cache-dir pillow
+RUN pip3 install --no-cache-dir pandas
+
+COPY sample_images.json /app/sample_images.json
+COPY vision-QA.py /app/vision-QA.py
+
+ENTRYPOINT [ "python3", "/app/vision-QA.py" ]
