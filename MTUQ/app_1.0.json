@@ -1,5 +1,5 @@
 {
-  "id": "mtuq-app",
+  "id": "MTUQ",
   "owner": "jacksont",
   "version": "1.0",
   "description": "MTUQ Containerized",
@@ -39,14 +39,14 @@
       }
     },
     "fileInputs": [
-      { 
+      {
         "name": "Python Script",
         "inputMode": "REQUIRED",
         "targetPath": "entrypoint.py",
         "description": "Put in the url to the python script you are running. In the format: tapis://Frontera.exec/scratch1/<num>/<user>/<script>.py * DO NOT CHANGE THE TARGET PATH * ",
         "autoMountLocal": true
       },
-      { 
+      {
         "name": "Data",
         "inputMode": "OPTIONAL",
         "targetPath": "*",
