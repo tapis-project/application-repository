@@ -1,0 +1,45 @@
+{
+  "name": "MsPASS-1.0",
+  "description": "MsPASS Containerized; currently supports running a MsPASS Jupyter Notebook on Frontera",
+  "appId": "MsPASS",
+  "appVersion": "1.0",
+  "archiveOnAppError": false,
+  "nodeCount": 4,
+  "coresPerNode": 1,
+  "jobType": "BATCH",
+  "memoryMB": 4000,
+  "maxMinutes": 45,
+  "isMpi": false,
+  "fileInputs": [],
+  "fileInputArrays": [],
+  "parameterSet": {
+    "appArgs": [
+      {
+        "arg": "/usr/sbin/tini -s -g -- /usr/sbin/start-mspass-tacc.sh",
+        "description": "Running startup script for Jupyter nb",
+        "include": true,
+        "name": "Run ipynb startup script"
+      }
+    ],
+    "containerArgs": [],
+    "schedulerOptions": [
+      {
+        "name": "allocation",
+        "description": "my allocation",
+        "include": true,
+        "arg": "-A TACC-ACI-CIC"
+      }
+    ],
+    "archiveFilter": {
+      "includes": [],
+      "excludes": [],
+      "includeLaunchFiles": false
+    },
+    "envVariables": [
+      {
+        "key": "TERM",
+        "value": "xterm-256color"
+      }
+    ]
+  }
+}
