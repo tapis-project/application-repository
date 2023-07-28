@@ -36,7 +36,7 @@
         "name": "Allocation",
         "description": "allocation acc",
         "include": true,
-        "arg": "-A TACC-ACI-CIC"
+        "arg": ""
       }
     ],
     "archiveFilter": {
