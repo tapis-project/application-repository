@@ -1,4 +1,4 @@
-# image: tapis/img-classify:0.2
+# image: tapis/img-classify-sing:0.3
 FROM tensorflow/tensorflow:1.5.0-py3
 
 # Install necessary requirements

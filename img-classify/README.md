@@ -26,7 +26,7 @@ attribute under the *jobAttributes* section in the app definition:
 {
     ...,
 
-    "containerImage": "docker://tapis/img-classify:0.1",
+    "containerImage": "docker://tapis/img-classify:0.3",
     "jobAttributes": {
         "execSystemId": <SYSTEM_NAME_HERE>,
         "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",

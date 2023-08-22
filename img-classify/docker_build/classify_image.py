@@ -32,6 +32,7 @@ from __future__ import print_function
 
 import argparse
 import os.path
+import os
 import re
 import sys
 import tarfile
@@ -153,10 +154,21 @@ def run_inference_on_image(image):
     node_lookup = NodeLookup()
 
     top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
+
+    # Print output to screen and write to file
+    outputDir = os.environ.get('_tapisExecSystemOutputDir')
+    if outputDir is None:
+      outputPath = '/tmp/output.txt'
+    else:
+        outputPath = os.path.expandvars('${_tapisSysRootDir}/${_tapisExecSystemOutputDir}/output.txt')
+    print('Using output path: %s\n' % outputPath)
+    f = open(outputPath, "a")
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
-      print('%s (score = %.5f)' % (human_string, score))
+      print('%s (score = %.5f)\n' % (human_string, score))
+      f.write('%s (score = %.5f)\n' % (human_string, score))
+    f.close()
 
 
 def maybe_download_and_extract():
