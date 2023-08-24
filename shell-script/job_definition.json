@@ -1,0 +1,11 @@
+{
+  "name": "basic-shell-script-job",
+  "appId": "<username>-basic-shell-script",
+  "appVersion": "0.1",
+  "execSystemId": "<system name>",
+  "parameterSet": {
+    "schedulerOptions": [
+      { "name": "allocation", "arg": "-A <my_allocation>" }
+    ]
+  }
+}
