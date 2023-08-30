@@ -1,16 +1,15 @@
 {
-    "name": "img-classify-job",
-    "appId": "<username>-img-classify",
-    "appVersion": "0.1",
-    "execSystemId": "<system name>",
-    "parameterSet": {
-        "appArgs": [
-            {
-                "arg": "--image_file"
-            },
-            {
-                "arg": "'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg'"
-            }
-        ]
-    }
+  "name": "img-classify-job",
+  "appId": "<username>-img-classify",
+  "appVersion": "0.1",
+  "execSystemId": "<system name>",
+  "parameterSet": {
+    "schedulerOptions": [ { "name": "allocation", "arg": "-A <my_allocation>" } ],
+    "appArgs": [
+      { "arg": "--image_file" },
+      {
+        "arg": "'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg'"
+      }
+    ]
+  }
 }

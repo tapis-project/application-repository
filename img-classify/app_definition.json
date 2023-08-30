@@ -1,5 +1,5 @@
 {
-    "id": "kprice-img-classify",
+    "id": "<username>-img-classify",
     "version": "0.1",
     "description": "An image classifier run using Singularity in batch mode.",
     "jobType": "BATCH",

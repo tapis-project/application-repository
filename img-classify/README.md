@@ -5,6 +5,9 @@ It was demonstrated as part of a tutorial presented by TACC at the SCGI Gateways
 More information about the tutorial can be found
 [here](https://github.com/TACC-Cloud/pearc22-portable-computing-cloud-hpc/releases/tag/gateways21-portable-computing-cloud-hpc)
 
+For more information on running jobs in Tapis please see the
+[documentation](https://tapis.readthedocs.io/en/latest/technical/jobs.html).
+
 ## Details
 
 The img-classify application is non-interactive. Once a job using this app has been submitted, the input files provided
@@ -36,8 +39,8 @@ attribute under the *jobAttributes* section in the app definition:
 ```
 
 If using the job definition template, be sure to replace the *execSystemId* with a specific system
-(or remove it entirely), update *appId* with the Id of the application you created and change the "--account" in
-*appArgs* to your specific account allocation.
+(or remove it entirely), update *appId* with the Id of the application you created and change the "-A" in
+*schedulerOptions* to your specific account allocation.
 
 
 ## Handling input files
