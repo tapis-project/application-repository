@@ -1,0 +1,43 @@
+{
+  "App_definiton_1":
+  {
+    "id": "<UID>-transformer-visionQA",
+    "version": "0.0.1",
+    "description": "(GPU|CPU)A visual question answering module: takes an image, a set of questions and answers the questions w.r.t image ",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://swathimanikya/vision-qa:1.0.0",
+    "jobAttributes": {
+        "parameterSet": {
+          "archiveFilter": { "includeLaunchFiles": false }
+        },
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+        
+},
+"App_definiton_2":
+{
+  "id": "<UID>-transformer-visionQA",
+  "version": "0.0.2",
+  "description": "(CPU)A visual question answering module: takes an image, a set of questions and answers the questions w.r.t image ",
+  "jobType": "BATCH",
+  "runtime": "SINGULARITY",
+  "runtimeOptions": ["SINGULARITY_RUN"],
+  "containerImage": "docker://swathimanikya/vision-qa:1.1.0",
+  "jobAttributes": {
+      "parameterSet": {
+        "archiveFilter": { "includeLaunchFiles": false }
+      },
+      "memoryMB": 1,
+      "nodeCount": 1,
+      "coresPerNode": 1,
+      "maxMinutes": 10
+  }
+      
+}
+}
+

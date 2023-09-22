@@ -1,0 +1,32 @@
+{
+    "frontera-normal":
+    {
+        "name": "FronteraNormal",
+        "hpcQueueName": "normal",
+        "maxJobs": -1,
+        "maxJobsPerUser": 200,
+        "minNodeCount": 3,
+        "maxNodeCount": 512,
+        "minCoresPerNode": 1,
+        "maxCoresPerNode": 56,
+        "minMemoryMB": 1,
+        "maxMemoryMB": 192000,
+        "minMinutes": 1,
+        "maxMinutes": 2880
+    },
+    "frontera-rtx-dev": 
+    {
+        "name": "Fronterartx-dev",
+        "hpcQueueName": "rtx-dev",
+        "maxJobs": -1,
+        "maxJobsPerUser": 3,
+        "minNodeCount": 1,
+        "maxNodeCount": 2,
+        "minCoresPerNode": 1,
+        "maxCoresPerNode": 16,
+        "minMemoryMB": 1,
+        "maxMemoryMB": 128000,
+        "minMinutes": 1,
+        "maxMinutes": 120
+    }
+}
