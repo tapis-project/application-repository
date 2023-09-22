@@ -1,0 +1,16 @@
+{
+    "name": "sentiment-analysis-job",
+    "appId": "<username>-sentiment-analysis",
+    "appVersion": "0.2",
+    "execSystemId": "<system name>",
+    "parameterSet": {
+        "appArgs": [
+            {"arg": "--sentence"},
+            {"arg": "'<sentence>'"},
+            {"arg": "--return_all_scores"},
+            {"arg": "<True/False>"},
+            {"arg": "--model"},
+            {"arg": "<Model>"}
+        ]
+    }
+}
