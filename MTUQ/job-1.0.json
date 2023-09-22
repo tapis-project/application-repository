@@ -1,0 +1,55 @@
+{
+  "name": "mtuq-job",
+  "description": "MTUQ Containerized",
+  "appId": "MTUQ",
+  "appVersion": "1.0",
+  "archiveOnAppError": false,
+  "nodeCount": 4,
+  "coresPerNode": 1,
+  "jobType": "BATCH",
+  "memoryMB": 4000,
+  "maxMinutes": 25,
+  "isMpi": true,
+  "mpiCmd": "ibrun",
+  "fileInputs": [
+    {
+      "name": "Python Script",
+      "sourceUrl": "tapis://Frontera.exec/scratch1/09052/jacksont/DetailedAnalysis.py",
+      "targetPath": "entrypoint.py",
+      "description": "user input file",
+      "autoMountLocal": true
+    }
+  ],
+  "fileInputArrays": [],
+  "parameterSet": {
+    "appArgs": [
+      {
+        "include": true,
+        "name": "Run python script",
+        "arg": "python3 entrypoint.py",
+        "description": "Running input file"
+      }
+    ],
+    "containerArgs": [],
+    "schedulerOptions": [
+      {
+        "name": "Allocation",
+        "description": "allocation acc",
+        "include": true,
+        "arg": ""
+      }
+    ],
+    "archiveFilter": {
+      "includes": [],
+      "excludes": [],
+      "includeLaunchFiles": false
+    },
+    "envVariables": [
+      {
+        "key": "SYNGINE_CACHE",
+        "value": "$SCRATCH/syngine_cache"
+      }
+    ]
+  },
+  "execSystemId": "Frontera.exec"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "MsPASS",
+  "owner": "jacksont",
+  "version": "1.0",
+  "description": "MsPASS Containerized; currently supports running a MsPASS Jupyter Notebook on Frontera",
+  "jobType": "BATCH",
+  "runtime": "SINGULARITY",
+  "runtimeOptions": ["SINGULARITY_RUN"],
+  "containerImage": "docker://jthet/mspass-tapis:1.0",
+  "strictFileInputs": false,
+  "jobAttributes": {
+    "description": "MsPASS Job Attributes",
+    "execSystemId": "Frontera.exec",
+    "dynamicExecSystem": false,
+    "isMpi": false, 
+    "parameterSet": {
+      "appArgs": [
+        { 
+          "name": "Run ipynb startup script",
+          "inputMode": "REQUIRED",
+          "description": "Running startup script for Jupyter nb",
+          "arg": "/usr/sbin/tini -s -g -- /usr/sbin/start-mspass-tacc.sh"
+        }
+      ],
+      "containerArgs": [],
+      "schedulerOptions": [],
+      "envVariables": [
+        {
+          "key": "TERM",
+          "value": "xterm-256color",
+          "inputMode": "REQUIRED"
+        }
+      ],  
+      "archiveFilter": {
+        "includes": [],
+        "excludes": [],
+        "includeLaunchFiles": false
+      }
+    },
+    "fileInputs": [],
+    "fileInputArrays": [],
+    "memoryMB": 4000, 
+    "nodeCount": 4,
+    "coresPerNode": 1,
+    "maxMinutes": 45
+  } 
+}
