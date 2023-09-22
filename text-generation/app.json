@@ -1,0 +1,20 @@
+{
+    "id": "text-generation-dwi67",
+    "version": "0.2.0",
+    "description": "Application for the Text Generation Hugging Face ML model",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://dhannywi/text-generation:0.2",
+    "jobAttributes": {
+        "parameterSet": {
+            "archiveFilter": { 
+                "includeLaunchFiles": false 
+            }
+        },
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+}

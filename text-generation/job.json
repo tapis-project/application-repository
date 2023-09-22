@@ -1,0 +1,22 @@
+{
+    "name": "text-generation-job",
+    "appId": "text-generation-dwi67",
+    "appVersion": "0.2.0",
+    "execSystemId": "<system name>",
+    "parameterSet": {
+        "appArgs": [
+            {
+                "arg": "distilgpt2" 
+            },
+            {
+                "arg": "'Once upon a time'"
+            },
+            {
+                "arg": "30"
+            },
+            {
+                "arg": "2"
+            }
+        ]
+    }
+}
