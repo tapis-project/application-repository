@@ -46,7 +46,7 @@
       "envVariables": [
         {
           "key": "SYNGINE_CACHE",
-          "value": "$SCRATCH/syngine_cache"
+          "value": "syngine_cache"
         },
         {
           "key": "TERM",

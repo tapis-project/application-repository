@@ -29,7 +29,7 @@
         "envVariables": [
           {
             "key": "SYNGINE_CACHE",
-            "value": "$SCRATCH/syngine_cache",
+            "value": "syngine_cache",
             "description": "There must be a folder in your $SCRATCH directory named 'syngine_cache'"
           },
           {
