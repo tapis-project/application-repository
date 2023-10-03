@@ -1,0 +1,39 @@
+{
+    "name": "AF-execSystemId-Test-0.4",
+    "description": "testing adding an exec system and system outputs to it",
+    "appId": "AF-execSystemId-Test",
+    "appVersion": "0.4",
+    "archiveOnAppError": false,
+    "nodeCount": 2,
+    "coresPerNode": 2,
+    "jobType": "BATCH",
+    "memoryMB": 100,
+    "maxMinutes": 100,
+    "isMpi": false,
+    "fileInputs": [
+      {
+        "name": "test1",
+        "sourceUrl": "tapis://afsystem_id_hpc2/sent-analysis/test1.txt",
+        "targetPath": "tapis://afsystem_id_hpc2/sent-analysis/test1.txt"
+      }
+    ],
+    "fileInputArrays": [],
+    "parameterSet": {
+      "appArgs": [
+        {
+          "arg": "sentiment_analysis",
+          "include": true,
+          "name": "Pipeline_Name",
+          "notes": {}
+        }
+      ],
+      "containerArgs": [],
+      "schedulerOptions": [],
+      "archiveFilter": {
+        "includes": [],
+        "excludes": [],
+        "includeLaunchFiles": true
+      },
+      "envVariables": []
+    }
+  }
