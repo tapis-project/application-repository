@@ -58,46 +58,18 @@ def main():
         for filename in filenames:
             with open(filename, "r") as file:
                 args.append(file.read())
-        print(args)
         
         result = pipeline(*args)
-
-        
     except Exception as e: 
         raise Exception(f"Error running pipeline: {e}")
-    
-    # Pass the arguments to the selected pipeline function
-    #print(prediction)
-    print("Result:", result)
-        
-    os.environ['SENTENCE_TRANSFORMERS_HOME'] = './.cache'
 
-    # Print output to screen and write to file
-    tapis_app_id = os.environ.get('_tapisAppId')
-    if tapis_app_id is None:
-        # Not running under Tapis, write to /tmp
-        print('Not running under Tapis. Writing output to /tmp\n')
-        outputPath = '/tmp/output.txt'
-    else:
-        # Running under Tapis.
-        print('Running under Tapis: _tapisAppId=%s\n' % tapis_app_id)
-        # If Docker, write to /TapisOutput,
-        # else write to $_tapisExecSystemOutputDir
-        tapis_sing_name = os.environ.get('SINGULARITY_NAME')
-        if tapis_sing_name is None:
-            print('Running via Tapis using Docker\n')
-            outputPath = '/TapisOutput/output.txt'
-        else:
-            print('Running via Tapis using Singularity\n')
-            outputDir = os.environ.get('_tapisExecSystemOutputDir')
-            if outputDir is None:
-                print('WARNING: _tapisExecSystemOutputDir not set. Using /tmp for output.')
-                outputPath = '/tmp/output.txt'
-            else:
-                outputPath = os.path.join(outputDir, "output.txt")
-    print('Using output path: %s\n' % outputPath)
-    with open(outputPath, "a") as f:
+    # Resolve the output file path based on environment
+    outputDir = os.environ.get('_tapisExecSystemOutputDir') or "/TapisOutput"
+    os.makedirs(outputDir, exist_ok=True)
+
+    with open(os.path.join(outputDir, 'output.txt'), "w") as f:
         f.write(str(result))
 
 if __name__ == "__main__":
     main()
+
