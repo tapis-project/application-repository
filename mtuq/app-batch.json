@@ -1,0 +1,61 @@
+{
+    "id": "mtuq-batch",
+    "owner": "${apiUserId}",
+    "version": "1.0",
+    "description": "MTUQ Containerized; Runs batch",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://jthet/mtuq:latest",
+    "strictFileInputs": false,
+    "jobAttributes": {
+      "description": "MTUQ Job Attributes",
+      "execSystemId": "Frontera.exec",
+      "dynamicExecSystem": false,
+      "execSystemLogicalQueue": null,
+      "isMpi": true,
+      "mpiCmd": "ibrun",
+      "parameterSet": {
+        "appArgs": [
+          {
+            "name": "python run command",
+            "inputMode": "REQUIRED",
+            "description": "Do not change",
+            "arg": "python3 entrypoint.py"
+          }
+        ],
+        "containerArgs": [],
+        "schedulerOptions": [],
+        "envVariables": [
+          {
+            "key": "SYNGINE_CACHE",
+            "value": "syngine_cache",
+            "description": "There must be a folder in your $SCRATCH directory named 'syngine_cache'"
+          },
+          {
+            "key": "TERM",
+            "value": "xterm-256color"
+          }
+        ],
+        "archiveFilter": {
+          "includes": [],
+          "excludes": [],
+          "includeLaunchFiles": false
+        }
+      },
+      "fileInputs": [
+        {
+          "name": "Python Script to be run",
+          "inputMode": "REQUIRED",
+          "targetPath": "entrypoint.py",
+          "description": "Script Path. In the format: tapis://Frontera.exec/scratch1/<num>/<user>/<script>.py ",
+          "autoMountLocal": true
+        }
+      ],
+      "fileInputArrays": [],
+      "memoryMB": 4000,
+      "nodeCount": 4,
+      "coresPerNode": 1,
+      "maxMinutes": 25
+    }
+}
