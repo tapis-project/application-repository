@@ -1,0 +1,37 @@
+{
+  "name": "AF-execSystemId-Test-dev.0.3",
+  "description": "Exec Sys Dir works locally, testing on Tapis",
+  "appId": "AF-execSystemId-Test",
+  "appVersion": "dev.0.3",
+  "archiveOnAppError": false,
+  "nodeCount": 2,
+  "coresPerNode": 2,
+  "jobType": "BATCH",
+  "memoryMB": 100,
+  "maxMinutes": 100,
+  "isMpi": false,
+  "fileInputs": [],
+  "fileInputArrays": [],
+  "parameterSet": {
+      "appArgs": [
+          {
+              "arg": "python3 /src/main.py",
+              "include": true,
+              "name": "python3"
+          },
+          {
+              "arg": "sentiment_analysis",
+              "include": true,
+              "name": "Pipeline_Name"
+          }
+      ],
+      "containerArgs": [],
+      "schedulerOptions": [],
+      "archiveFilter": {
+          "includes": [],
+          "excludes": [],
+          "includeLaunchFiles": true
+      },
+      "envVariables": []
+  }
+}
