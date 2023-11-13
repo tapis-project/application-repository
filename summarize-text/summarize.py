@@ -1,4 +1,4 @@
-import argparse, os
+import argparse, os, sys
 
 from transformers import pipeline
 
@@ -25,6 +25,7 @@ def summarize(flags) -> str:
     if not text and not file:
         raise Exception("Must provide at least 1 statement with --text flag or at least 1 file with the --file.")
     
+    
     if file and not os.path.isfile(file):
         raise Exception(f"A path provided in the --file flag is not a file | {file}")
 
@@ -36,7 +37,7 @@ def summarize(flags) -> str:
 
     if not summary_result:
         raise Exception("No summary result")
-    
+
     return summary_result[0]['summary_text']
 
     
@@ -58,9 +59,7 @@ def write_to_file(summary_result):
         ),
         "summary.txt"
     )
-    
-    output_filename = os.path.join(OUTPUT_DIR, "summary.txt")
-    
+        
     try:
         os.makedirs(os.path.dirname(output_filename), exist_ok=True)
         with open(output_filename, 'w') as file:
