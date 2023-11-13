@@ -92,6 +92,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-#TODO 1) add the STDerr for file failure. Needs to return the reason for failure so that we can catch the exception. Write to STDerr and then exit program. 
-# sys.exit() or just exit(). Provide an exit code. Remember that it must be an integer. Don't use 0 because typically non0 return codes indicate error. 
