@@ -83,15 +83,11 @@ def main():
     parser.add_argument('--max', default=5, type=int, help='this is the maximum characters to be used in the summary.')
     parser.add_argument('--model', default='t5-base', type=str, help='select your model type. Default is t5-base.')
     parser.add_argument('--file', type=str, help='files to be added intead of statement')
-    
     flags, _ = parser.parse_known_args()
-    
+
     #print(summary)
     write_to_file(summarize(flags))
 
 
 if __name__ == "__main__":
     main()
-    
-#TODO 1) add the STDerr for file failure. Needs to return the reason for failure so that we can catch the exception. Write to STDerr and then exit program. 
-# sys.exit() or just exit(). Provide an exit code. Remember that it must be an integer. Don't use 0 because typically non0 return codes indicate error. 
