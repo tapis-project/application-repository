@@ -22,7 +22,7 @@ def summarize(flags) -> str:
     model = flags.model
     file = flags.file
     
-    if not text and not file:
+    if text == None and file == None:
         raise Exception("Must provide at least 1 statement with --text flag or at least 1 file with the --file.")
     
     
