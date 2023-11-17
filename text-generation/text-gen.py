@@ -1,4 +1,4 @@
-import argparse, os, requests, sys
+import argparse, os, requests, sys, textwrap
 
 from bs4 import BeautifulSoup
 from transformers import pipeline
@@ -62,9 +62,16 @@ def gen_text(flags):
         output = pipeline("text-generation")
         generated_text = output(statement, model=model, max_length=max_output, num_return_sequences=sequence)
     except Exception as e:
-        return e
+        print(f"Error in text generation: {e}")
+        return None
 
-    return(str(generated_text[0]['generated_text'].replace("'\n'", "").encode("utf-8")))
+    generated_text= (str(generated_text[0]['generated_text'].
+            replace("\n", "").
+            encode("ascii", errors="ignore").decode("unicode-escape")))
+    
+    generated_text = textwrap.fill(generated_text, width=80)
+    
+    return generated_text
 
 
 def write_to_file(generated_text):
@@ -85,6 +92,7 @@ def write_to_file(generated_text):
         "output.txt"
     )
     
+    print("write_to_file type ", type(generated_text))
     
     try:
         os.makedirs(os.path.dirname(output_filename), exist_ok=True)
@@ -93,9 +101,6 @@ def write_to_file(generated_text):
         print("Output written to", output_filename)
     except IOError:
         print("Error writing to file", output_filename)
-        
-    #with open(filename, 'r') as file:
-    #print(file.read())
     
 
 def main():
