@@ -39,10 +39,10 @@ def gen_text(flags):
     model = flags.model
     statement = flags.statement
     sequence = flags.sequence
-    max_output = flags.max_output
     file = flags.file
     url = flags.url
     url_file_used = "./text-generator-files/url_as_file.txt"
+    max_output = flags.max_output
 
     if statement == None and file == None and url == None:
         raise Exception("You must provide either a statement, a file, or a URL")
@@ -92,7 +92,6 @@ def write_to_file(generated_text):
         "output.txt"
     )
     
-    print("write_to_file type ", type(generated_text))
     
     try:
         os.makedirs(os.path.dirname(output_filename), exist_ok=True)
@@ -112,7 +111,7 @@ def main():
     parser.add_argument('--model', default='distilgpt2', type=str, help='Text generation model name, please see: https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads')
     parser.add_argument('--statement', type=str, help='The sentence to be used for text generation')
     parser.add_argument('--sequence', default=2, type=int, help='Input to control how many different sequences are generated.')
-    parser.add_argument('--max_output', default=10, type=int, help='Input to control the total length of the output text are generated.')
+    parser.add_argument('--max_output', default=100, type=int, help='Input to control the total length of the output text are generated.')
     parser.add_argument('--file', type=str, help='File to be used for text generation.')
     parser.add_argument('--url', type=str, help='URL to be used for text generation.')
     
