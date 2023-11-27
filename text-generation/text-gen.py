@@ -1,6 +1,5 @@
 import argparse, os, requests, sys, textwrap
 
-from bs4 import BeautifulSoup
 from transformers import pipeline
 
 
@@ -43,7 +42,6 @@ def gen_text(flags):
     return generated_text[0]['generated_text']
  
     
-    # generated_text = textwrap.fill(generated_text, width=80)
 
 
 def write_to_file(generated_text):
