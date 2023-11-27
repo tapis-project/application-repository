@@ -1,36 +1,50 @@
-import sys, os
+import argparse, os, requests, sys, textwrap
+
 from transformers import pipeline
 
-def gen_text(model_name: str, sentence: str, max_len: int, num_seq: int) -> list:
+
+def gen_text(flags):
+    
     '''
     Function to generate text from input sentence, using the TextGenerationPipeline from huggingface. 
     Args:
         model_name (str): Text generation model name, please see: https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads
-        sentence (str): The input sentence for text generation.
+        statement (str): The input sentence for text generation.
         max_num (int): Input to control the total length of the output text are generated.
         num_seq (int): Input to control how many different sequences are generated.
     Output:
         output_text (list): Based on the sentence prompt, the model will auto-complete it by generating the remaining text in the text length and number of sequences specified.
     '''
-    try:
-        max_len = int(max_len)
-        num_seq = int(num_seq)
-    except Exception as e:
-        return f'Error: {e}. Please input integer for max_len and num_seq'
+    
+        
+    model = flags.model
+    statement = flags.statement
+    sequence = flags.sequence
+    file = flags.file
+    max_output = flags.max_output
+
+    if statement == None and file == None:
+        raise Exception("You must provide either a statement or a file")
+    
+    if file:
+        if not os.path.isfile(file):
+            raise Exception(f"A path provided in the --file flag is not a file | {file}")
+        with open(file, mode="r") as file_obj:
+            statement = file_obj.read()
 
     try:
-        generator = pipeline("text-generation", model=model_name) # tested using "distilgpt2"
+        output = pipeline("text-generation",model=model)
+        generated_text = output(statement, max_len=max_output, num_return_sequences=sequence)
     except Exception as e:
-        return f'Error: {e}. Please check if model inputted is compatible.'
+        print(f"Error in text generation: {e}")
+        return None
+    
+    return generated_text[0]['generated_text']
+ 
+    
 
-    try:
-        output_text = generator(sentence, max_length=max_len, num_return_sequences=num_seq,)
-    except Exception as e:
-        return e
 
-    return (output_text)
-
-def write_to_file(results: str, filename: str):
+def write_to_file(generated_text):
     '''
     Function writes results string into a file.
     Args:
@@ -39,43 +53,40 @@ def write_to_file(results: str, filename: str):
     Returns:
         None
     '''
+        # output file destination
+    output_filename = os.path.join(
+        os.environ.get(
+            "_tapisExecSystemOutputDir",
+            "text-generator-files"
+        ),
+        "output.txt"
+    )
+        
     try:
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, 'w') as file:
-            file.write(results)
-        print("Output written to", filename)
+        os.makedirs(os.path.dirname(output_filename), exist_ok=True)
+        with open(output_filename, 'w', encoding="utf-8") as file:
+            file.write(generated_text)
+        print("Output written to", output_filename)
     except IOError:
-        print("Error writing to file", filename)
+        print("Error writing to file", output_filename)
+    
 
 def main():
-    # output file destination
-    directory = "text-generator"
-    filename = os.path.join(directory, "output.txt")
-
-    # get input
-    try:
-        model_name = sys.argv[1]
-        sentence = sys.argv[2]
-        max_len = int(sys.argv[3])
-        num_seq = int(sys.argv[4])
-    except Exception as e:
-        write_to_file(f'{e}\nNeed proper CLI inputs: <model_name>, <sentence>, <max_len> and <num_seq>\n', filename)
-        return e
     
-    # run model and get results
-    model_output = gen_text(model_name, sentence, max_len, num_seq)
-    if type(model_output) == list:
-        results = ""
-        for i in model_output:
-            print(i)
-            results += str(i["generated_text"]) + '\n'
-    else:
-        results = str(model_output) + '\n'
+    
+    #Obtain and parse app arguments
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument('--model', default='distilgpt2', type=str, help='Text generation model name, please see: https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads')
+    parser.add_argument('--statement', type=str, help='The sentence to be used for text generation')
+    parser.add_argument('--sequence', default=2, type=int, help='Input to control how many different sequences are generated.')
+    parser.add_argument('--max_output', default=100, type=int, help='Input to control the total length of the output text are generated.')
+    parser.add_argument('--file', type=str, help='File to be used for text generation.')
+    
+    flags, _ = parser.parse_known_args()
 
-    write_to_file(results, filename)
-
-    with open(filename, 'r') as file:
-            print(file.read())
+    #Run the program
+    print(write_to_file(gen_text(flags)))
 
 if __name__ == "__main__":
     main()
