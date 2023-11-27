@@ -4,24 +4,6 @@ from bs4 import BeautifulSoup
 from transformers import pipeline
 
 
-def url_to_file(flags):
-    #Get content
-    content = requests.get(flags.url).text
-    soup = BeautifulSoup(content, 'html.parser')
-
-    
-    #remove footer
-    content_footer = soup.find('footer')
-    if content_footer:
-        content_footer.decompose()
-    
-    content = soup.get_text()
-    content.replace("\n", "")
-    
-    #write content to file
-    with open(f"./text-generator-files/url_as_file.txt", "w", encoding="utf-8") as file:
-        file.write(str(content))
-
 def gen_text(flags):
     
     '''
@@ -40,38 +22,28 @@ def gen_text(flags):
     statement = flags.statement
     sequence = flags.sequence
     file = flags.file
-    url = flags.url
-    url_file_used = "./text-generator-files/url_as_file.txt"
     max_output = flags.max_output
 
-    if statement == None and file == None and url == None:
-        raise Exception("You must provide either a statement, a file, or a URL")
+    if statement == None and file == None:
+        raise Exception("You must provide either a statement or a file")
     
-    if file and not os.path.isfile(file):
-        raise Exception(f"A path provided in the --file flag is not a file | {file}")
-
-
-    if file == None:
-        with open(url_file_used, mode="r", encoding="utf-8") as file_obj:
-            statement = file_obj.read()
-    else:
-        with open(file, mode="r", encoding="utf-8") as file_obj:
+    if file:
+        if not os.path.isfile(file):
+            raise Exception(f"A path provided in the --file flag is not a file | {file}")
+        with open(file, mode="r") as file_obj:
             statement = file_obj.read()
 
     try:
-        output = pipeline("text-generation")
-        generated_text = output(statement, model=model, max_length=max_output, num_return_sequences=sequence)
+        output = pipeline("text-generation",model=model)
+        generated_text = output(statement, max_len=max_output, num_return_sequences=sequence)
     except Exception as e:
         print(f"Error in text generation: {e}")
         return None
-
-    generated_text= (str(generated_text[0]['generated_text'].
-            replace("\n", "").
-            encode("ascii", errors="ignore").decode("unicode-escape")))
     
-    generated_text = textwrap.fill(generated_text, width=80)
+    return generated_text[0]['generated_text']
+ 
     
-    return generated_text
+    # generated_text = textwrap.fill(generated_text, width=80)
 
 
 def write_to_file(generated_text):
@@ -91,11 +63,10 @@ def write_to_file(generated_text):
         ),
         "output.txt"
     )
-    
-    
+        
     try:
         os.makedirs(os.path.dirname(output_filename), exist_ok=True)
-        with open(output_filename, 'w') as file:
+        with open(output_filename, 'w', encoding="utf-8") as file:
             file.write(generated_text)
         print("Output written to", output_filename)
     except IOError:
@@ -113,12 +84,10 @@ def main():
     parser.add_argument('--sequence', default=2, type=int, help='Input to control how many different sequences are generated.')
     parser.add_argument('--max_output', default=100, type=int, help='Input to control the total length of the output text are generated.')
     parser.add_argument('--file', type=str, help='File to be used for text generation.')
-    parser.add_argument('--url', type=str, help='URL to be used for text generation.')
     
     flags, _ = parser.parse_known_args()
 
     #Run the program
-    url_to_file(flags)
     print(write_to_file(gen_text(flags)))
 
 if __name__ == "__main__":
