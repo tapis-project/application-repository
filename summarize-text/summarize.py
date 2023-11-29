@@ -5,11 +5,13 @@ from transformers import pipeline
 
 
 def url_to_file(flags) -> str:
+    '''
+    Write the URL contents to a file 
+    '''
     #Get content
     content = requests.get(flags.url).text
     soup = BeautifulSoup(content, 'html.parser')
 
-    
     #Remove footer
     content_footer = soup.find('footer')
     if content_footer:
@@ -22,7 +24,6 @@ def url_to_file(flags) -> str:
     #Write content to file
     with open(f"./file_inputs/url_as_file.txt", "w", encoding="utf-8") as file:
         file.write(content)
-    
     
     
 def summarize(flags) -> str:
@@ -50,7 +51,6 @@ def summarize(flags) -> str:
     if text == None and file == None and url == None:
         raise Exception("Must provide at least 1 statement with --text flag, 1 file with the --file, or 1 url with the --url.")
     
-    
     if file and not os.path.isfile(file):
         raise Exception(f"A path provided in the --file flag is not a file | {file}")
 
@@ -66,7 +66,6 @@ def summarize(flags) -> str:
     min_len = len(text) //20
     max_len = len(text) //10 
             
-    
     output = pipeline('summarization', model=model)
     summary_result = output(text, min_length=min_len, max_length=max_len)
 
@@ -77,6 +76,7 @@ def summarize(flags) -> str:
                replace("\n", "").
                encode("ascii", errors="ignore").
                decode("utf-8"))
+
 
 def write_to_file(summary_result):
     """
@@ -109,7 +109,6 @@ def write_to_file(summary_result):
 def main():
     '''
     Main function to summarize text.
-    
 
     #using argparse to rewrite the main function
     # adding args, flagging the statement to be summarized as mandatory
