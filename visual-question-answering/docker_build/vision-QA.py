@@ -1,78 +1,13 @@
-""""
-Author: Swathi Vallabhajosyula
-Description: This program takes inputs to perform visual question answering using a pre-trained hugging face model. 
-How to run the program:
-    usage: python vision-QA.py [-h] [-o OUTPUT] [-t INPUTTYPE] [-i IMAGEURL] ([-q QUESTION]|[-l QUESTIONLIST])
+import argparse, os, re, requests
+import random, time, json
+import pandas as pd
 
-    Please provide an image url and a question w.r.t. the image
-
-    options:
-    -h, --help            show this help message and exit
-    -o OUTPUT, --output OUTPUT
-                            Path to save the results:
-    -t INPUTTYPE, --inputtype INPUTTYPE
-                            Mention the type of input (pair=input and question, pairlist = image and list of questions, samplelist = to generate a random sample of image urls for reference and store in output foler as 'Samples.txt'):
-    -i IMAGEURL, --imageurl IMAGEURL
-                            Enter url to an image:
-    -q QUESTION, --question QUESTION
-                            Enter a question w.r.t an image
-    -l QUESTIONLIST, --questionlist QUESTIONLIST
-                            Enter a question list w.r.t an image
-
-Input: 
-    OUTPUT: The path to output Dir to store the results (could be an absolute path or a relative path)
-    INPUTTYPE: 
-        - "pair": to provide ONE question with respect to IMAGEURL
-        - "pairlist": to provide a LIST of questions with respect to IMAGEURL
-        - "samplelist": to generate a random sample of image urls for reference and store in output foler as 'Samples.txt'
-    IMAGEURL: A web acessible image URL.
-    QUESTION: A string of text i.e. ONE question w.r.t. to IMAGEURL
-    QUESTIONLIST:  A list of strings of text i.e. list of questions w.r.t. to IMAGEURL
-
-Output:
-    Either generates response to the questions w.r.t. image in IMAGEURL or generates a sample list of IMAGEURLS to try the application
-
-examples:
-* To get sample image URLS (default without any commandline inputs or -t option)
-python vision-QA.py
-* To get response for one answer per IMAGE URL
-python vision-QA.py -t "pair" -i "http://images.cocodataset.org/val2017/000000039769.jpg" -q "How many cats in image?"
-* To get resoinse for one answer per IMAGE URL
-python vision-QA.py -t "pairlist" -i "http://images.cocodataset.org/val2017/000000039769.jpg" -l "['How many cats in image?', 'What animal is in the image?', 'What device is in the image?', 'How many devices?']"
-* To get sample image URLS and stire them in a perticular folder
-python vision-QA.py -t "samplelist" -o "Samples"
-
-
-"""
 
 from transformers import ViltProcessor, ViltForQuestionAnswering
-import requests
 from PIL import Image
-import argparse, os, re
-import pandas as pd
-import random, time, json
 
 
-
-def load_model(type="default"):
-    """
-    :Name: load_model 
-    :Description: loads the selected huggingface model to infer the visual-QA
-
-    :param type: specifies the model to use, the dafault value is "default"
-
-    :return (processor, model): retunrs the image processor and selected huggingface model
-    """ 
-    if type == 'default':
-        processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
-        model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
-    else:
-        model=None
-
-    return (processor, model)
-
-
-def use_model(processor=None, model=None, image_question=None):
+def use_model(image_question=None):
     """
     :Name: use_model
     :Desctription: load_model loads the selected huggingface model to infer the visual-QA
@@ -84,6 +19,10 @@ def use_model(processor=None, model=None, image_question=None):
     :return result: retunrs the selected answer to the question against the image
     """ 
     result =[]
+    model = flags.model
+    image_question = flags.image_question
+    
+    
     if model:
         for i_q_pair in image_question:
             image_pil=  None
@@ -183,26 +122,24 @@ def generate_sample_images_n_store(noOfSamples=10, display=True, samples_folder=
     return sampleList
 
 
-if __name__=="__main__":
-    """
+def main():
+     """
     :Name: entry point
     :Desctription: Tages in the command like argimnets and performs Visual-QA
     """ 
-    random.seed(int(time.time()))
     
     parser = argparse.ArgumentParser(description='Please provide an image url and a question w.r.t. the image')
-   
+
     parser.add_argument("-o", "--output", default="Samples", help="Path to save the results:") 
     parser.add_argument("-t", "--inputtype", default="samplelist", help="Mention the type of input (pair=input and question, pairlist = image and list of questions, samplelist = to generate a random sample of image urls for reference and store in output foler as 'Samples.txt')")   
     parser.add_argument("-i", "--imageurl", default="http://images.cocodataset.org/val2017/000000039769.jpg", help="Enter url to an image") 
-    parser.add_argument("-q", "--question", default="How many cats in image?", help="Enter a question w.r.t an image")   
-    parser.add_argument("-l", "--questionlist", default="['How many cats in image?', 'What animal is in the image?', 'What device is in the image?', 'How many devices?']", help="Type a question list w.r.t an image")                                                             
-                                                           
+    parser.add_argument("-q", "--question", nargs="+", default="How many cats in image?", help="Enter a question w.r.t an image")   
+    parser.add_argument("-m", "--model", default="", help="Option to use any model. Default model is")                                                   
 
     args = parser.parse_args()
+    flags, _ = parser.parse_known_args()
 
 
-    
     if args.inputtype == "samplelist":
         sampleList= generate_sample_images_n_store(samples_folder=args.output)
     else:
@@ -213,10 +150,18 @@ if __name__=="__main__":
             questionslist=[args.question]
         else:
             questionslist = convert_string_2_questions(args.questionlist)
-       
+    
     
         img_q_pair =[(args.imageurl, questionslist)]
         results = use_model(processor, model, img_q_pair)
         store_results_display(results, display=True, resullts_folder=args.output, resultfile="answers.csv")
 
 
+
+if __name__ == "__main__":
+    main()
+
+
+
+#TODO processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
+# Decide if processor is actually needed or required. 
