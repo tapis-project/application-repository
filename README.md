@@ -38,3 +38,51 @@ When adding an application definition to the repository, its folder should conta
 
 For more information on required application fields,
 please see the Tapis live-docs reference [here](https://tapis-project.github.io/live-docs/?service=Apps#operation/createAppVersion).
+
+
+#
+Author: Swathi Vallabhajosyula
+Description: This program takes inputs to perform visual question answering using a pre-trained hugging face model. 
+How to run the program:
+    usage: python vision-QA.py [-h] [-o OUTPUT] [-t INPUTTYPE] [-i IMAGEURL] ([-q QUESTION]|[-l QUESTIONLIST])
+
+    Please provide an image url and a question w.r.t. the image
+
+    options:
+    -h, --help            show this help message and exit
+    -o OUTPUT, --output OUTPUT
+                            Path to save the results:
+    -t INPUTTYPE, --inputtype INPUTTYPE
+                            Mention the type of input (pair=input and question, pairlist = image and list of questions, samplelist = to generate a random sample of image urls for reference and store in output foler as 'Samples.txt'):
+    -i IMAGEURL, --imageurl IMAGEURL
+                            Enter url to an image:
+    -q QUESTION, --question QUESTION
+                            Enter a question w.r.t an image
+    -l QUESTIONLIST, --questionlist QUESTIONLIST
+                            Enter a question list w.r.t an image
+
+Input: 
+    OUTPUT: The path to output Dir to store the results (could be an absolute path or a relative path)
+    INPUTTYPE: 
+        - "pair": to provide ONE question with respect to IMAGEURL
+        - "pairlist": to provide a LIST of questions with respect to IMAGEURL
+        - "samplelist": to generate a random sample of image urls for reference and store in output foler as 'Samples.txt'
+    IMAGEURL: A web acessible image URL.
+    QUESTION: A string of text i.e. ONE question w.r.t. to IMAGEURL
+    QUESTIONLIST:  A list of strings of text i.e. list of questions w.r.t. to IMAGEURL
+
+Output:
+    Either generates response to the questions w.r.t. image in IMAGEURL or generates a sample list of IMAGEURLS to try the application
+
+examples:
+* To get sample image URLS (default without any commandline inputs or -t option)
+python vision-QA.py
+* To get response for one answer per IMAGE URL
+python vision-QA.py -t "pair" -i "http://images.cocodataset.org/val2017/000000039769.jpg" -q "How many cats in image?"
+* To get resoinse for one answer per IMAGE URL
+python vision-QA.py -t "pairlist" -i "http://images.cocodataset.org/val2017/000000039769.jpg" -l "['How many cats in image?', 'What animal is in the image?', 'What device is in the image?', 'How many devices?']"
+* To get sample image URLS and stire them in a perticular folder
+python vision-QA.py -t "samplelist" -o "Samples"
+
+
+"""
