@@ -20,7 +20,7 @@
           "name": "allocation",
           "description": "allocation",
           "include": true,
-          "arg": "-A TACC-ACI-CIC"
+          "arg": ""
         }
       ],
       "archiveFilter": {
