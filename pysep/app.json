@@ -1,0 +1,40 @@
+{
+  "id": "pysep",
+  "owner": "${apiUserId}",
+  "version": "1.0",
+  "description": "Containerized pysep jupyter nb",
+  "jobType": "BATCH",
+  "runtime": "SINGULARITY",
+  "runtimeOptions": ["SINGULARITY_RUN"],
+  "containerImage": "docker://jthet/pysep:latest",
+  "strictFileInputs": false,
+  "jobAttributes": {
+    "description": "pysep Job Attributes",
+    "execSystemId": "Frontera.exec",
+    "dynamicExecSystem": false,
+    "execSystemLogicalQueue": null,
+    "isMpi": false,
+    "parameterSet": {
+      "appArgs": [],
+      "containerArgs": [],
+      "schedulerOptions": [],
+      "envVariables": [
+        {
+          "key": "TERM",
+          "value": "xterm-256color"
+        }
+      ],
+      "archiveFilter": {
+        "includes": [],
+        "excludes": [],
+        "includeLaunchFiles": false
+      }
+    },
+    "fileInputs": [],
+    "fileInputArrays": [],
+    "memoryMB": 4000,
+    "nodeCount": 4,
+    "coresPerNode": 1,
+    "maxMinutes": 45
+  }
+}
