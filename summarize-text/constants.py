@@ -1,4 +1,4 @@
-import json, os, requests
+import json, os
 
 
 # READ JSON CONFIGS
@@ -19,9 +19,3 @@ DEFAULT_OUTPUT_FILE_PATH = os.path.join(
 
 MIN_VALUE = configs["summaryCharacters"]["min"]
 MAX_VALUE = configs["summaryCharacters"]["max"]
-
-# MODELS
-
-DEFAULT_MODEL = configs["model"]["defaultModelt5Base"]
-CHECKPOINT_MODEL = configs["model"]["checkpointModel"]
-

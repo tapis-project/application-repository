@@ -1,4 +1,4 @@
-import argparse, os
+import argparse, os, requests
 
 import constants
 
@@ -15,7 +15,7 @@ def url_to_file(flags) -> str:
         pass
     
     #Get content
-    content = constants.GET_CONTENT(flags.url)
+    content = requests.get(flags.url).text
     soup = BeautifulSoup(content, 'html.parser')
 
     #Remove footer
@@ -46,7 +46,7 @@ def summarize(flags) -> str:
         '''
     
     text = flags.text
-    model = constants.DEFAULT_MODEL #If you want to use the checkpoint model, change DEFAULT_MODEL to CHECKPOINT_MODEL
+    model = flags.model
     file = flags.file
     url = flags.url
     url_file_used = './file_inputs/url_as_file.txt'
@@ -113,6 +113,10 @@ def main():
     parser.add_argument('--text', type=str, help='This is the text that needs to be summarized.')
     parser.add_argument('--url', type=str, help='URL that can be summarized. ** NOTE this feature is limited to only lite sites with text only.')
     parser.add_argument('--file', type=str, help='files to be added intead of statement')
+    parser.add_argument('--model', default='t5-base', type=str, nargs='?', help='choose from the following models',
+                        required=False,
+                        choices=['t5-base','checkpoint','Falconsai/text_summarization']
+                        )
 
     flags, _ = parser.parse_known_args()
 
