@@ -19,7 +19,7 @@ def gen_text(flags):
     
     statement = flags.statement    
     file = flags.file
-    model = constants.DEFAULT_MODEL
+    model = flags.model
     sequence = constants.SEQUENCE
     max_output = constants.MAX_OUTPUT
 
@@ -71,6 +71,10 @@ def main():
     
     parser.add_argument('--statement', type=str, help='The sentence to be used for text generation')
     parser.add_argument('--file', type=str, help='File to be used for text generation.')
+    parser.add_argument('--model', default='distilgpt2', type=str, nargs='?', help='choose from the following models',
+                        required=False,
+                        choices=['distilgpt2','checkpoint','microsoft/phi-2']
+                        )
     
     flags, _ = parser.parse_known_args()
 

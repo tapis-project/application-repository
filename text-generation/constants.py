@@ -1,6 +1,9 @@
 import json, os
 
 
+from functools import partial
+from transformers import pipeline
+
 # READ JSON CONFIGS
 
 with open('config.json', 'r') as f:
@@ -19,10 +22,3 @@ DEFAULT_OUTPUT_FILE_PATH = os.path.join(
 
 MAX_OUTPUT = configs["maxOutput"]
 SEQUENCE = configs["sequence"]
-
-# MODELS
-
-DEFAULT_MODEL = configs["models"]["defaultModeldistilgpt2"]
-CHECKPOINT_MODEL = configs["models"]["checkpointModel"]
-MICROSOFT_PHI2_MODEL = configs["models"]["microsoft/phi-2"]
-
