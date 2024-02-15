@@ -1,5 +1,6 @@
 import argparse, os, requests
 import pandas as pd
+import constants
 
 
 from transformers import ViltProcessor, ViltForQuestionAnswering
@@ -55,19 +56,9 @@ def store_results_display(result, display=True):
 
     :return: None
     """ 
-    results_folder_file = os.path.join(
-        os.environ.get(
-            "_tapisExecSystemOutputDir",
-            "results_folder"
-        ),
-        "results_file.csv"
-    )
-    results_folder = os.path.dirname(results_folder_file)
-    
-
 
     results_df = pd.DataFrame(result, columns=['Image', 'Question', 'Answer'])
-    results_df.to_csv(os.path.join(results_folder, "results_file.csv"), index=False)
+    results_df.to_csv(constants.DEFAULT_OUTPUT_FILE_PATH, index=False)
                                   
     if display:
         for ind in results_df.index:
@@ -84,7 +75,7 @@ def main():
 
     parser.add_argument("-i", "--imageurl", nargs="+", default=["http://images.cocodataset.org/val2017/000000039769.jpg"], help="Enter url to an image") 
     parser.add_argument("-q", "--question", nargs="+", default=[" What is this image?"], help="Enter a question w.r.t an image")   
-    parser.add_argument("-m", "--model", default="dandelin/vilt-b32-finetuned-vqa", help="Option to use any model. Default model is dandelin/vilt-b32-finetuned-vqa")                                                   
+    parser.add_argument("-m", "--model", nargs="?",default="dandelin/vilt-b32-finetuned-vqa", choices=["dandelin/vilt-b32-finetuned-vqa", "Salesforce/blip-vqa-base", "google/pix2struct-docvqa-base"], help="Option to use any model. Default model is dandelin/vilt-b32-finetuned-vqa")                                                   
 
     flags, _ = parser.parse_known_args()
 
