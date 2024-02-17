@@ -64,22 +64,15 @@ def store_results(results: AnalysisResult) -> None:
     """
     
     #if there was no sentence provided, prints this message, else prints the results
-    with open(
-        constants.DEFAULT_OUTPUT_FILE_PATH,
-        mode='a',
-        newline=''
-    ) as file:
+    with open(constants.DEFAULT_OUTPUT_FILE_PATH, mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["SENTENCE","POSITIVE", "NEGATIVE"])
+        labels = [label_data['label'] for _, analysis in results for label_data in analysis]
+        labels.insert(0,"SENTENCE")
+        writer.writerow(labels)
         for sentence, analysis in results:
-            if analysis["label"] != "POSITIVE" or analysis["label"] !="NEGATIVE":
-                print(f"{analysis} is not recognized as POSITIVE OR NEGATIVE. Here are the total results, {results}")
-            else:
-                writer.writerow([
-                    sentence, 
-                    next(filter(lambda analysis: analysis["label"] == "POSITIVE", analysis)),
-                    next(filter(lambda analysis: analysis["label"] == "NEGATIVE", analysis)),
-                ])
+            scores = ['%.3f' % label_data['score'] for label_data in analysis]
+            writer.writerow(
+                [sentence] + scores)
     
 def main():
     parser = argparse.ArgumentParser()

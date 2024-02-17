@@ -1,3 +1,6 @@
-SENTENCE,POSITIVE,NEGATIVE
-SENTENCE,POSITIVE,NEGATIVE
-SENTENCE,POSITIVE,NEGATIVE
+SENTENCE,anger,disgust,fear,joy,neutral,sadness,surprise,anger,disgust,fear,joy,neutral,sadness,surprise
+I like pie.,0.009,0.049,0.002,0.810,0.110,0.015,0.005
+I like Sarah,0.004,0.003,0.001,0.977,0.006,0.006,0.003
+SENTENCE,anger,disgust,fear,joy,neutral,sadness,surprise,anger,disgust,fear,joy,neutral,sadness,surprise
+I like pie.,0.009,0.049,0.002,0.810,0.110,0.015,0.005
+I like driving,0.002,0.001,0.001,0.990,0.001,0.004,0.001
