@@ -30,25 +30,38 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import argparse, os, re
-import  sys, tarfile
+import argparse
+import os.path
+import os
+import re
+import sys
+import tarfile
 
-import requests
 import numpy as np
-import tensorflow as tf
-
 from six.moves import urllib
+import tensorflow as tf
+import requests
+
+FLAGS = None
+
+# pylint: disable=line-too-long
+DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
+# pylint: enable=line-too-long
 
 
 class NodeLookup(object):
   """Converts integer node ID's to human readable labels."""
 
-  def __init__(self, FLAGS):
+  def __init__(self,
+               label_lookup_path=None,
+               uid_lookup_path=None):
+    if not label_lookup_path:
       label_lookup_path = os.path.join(
           FLAGS.model_dir, 'imagenet_2012_challenge_label_map_proto.pbtxt')
+    if not uid_lookup_path:
       uid_lookup_path = os.path.join(
           FLAGS.model_dir, 'imagenet_synset_to_human_label_map.txt')
-      self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
+    self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
 
   def load(self, label_lookup_path, uid_lookup_path):
     """Loads a human readable English name for each softmax node.
@@ -74,8 +87,8 @@ class NodeLookup(object):
       uid_to_human[uid] = human_string
 
     # Loads mapping from string UID to integer node ID.
-    proto_as_ascii = tf.gfile.GFile(label_lookup_path).readlines()
     node_id_to_uid = {}
+    proto_as_ascii = tf.gfile.GFile(label_lookup_path).readlines()
     for line in proto_as_ascii:
       if line.startswith('  target_class:'):
         target_class = int(line.split(': ')[1])
@@ -99,7 +112,7 @@ class NodeLookup(object):
     return self.node_lookup[node_id]
 
 
-def create_graph(FLAGS):
+def create_graph():
   """Creates a graph from saved GraphDef file and returns a saver."""
   # Creates graph from saved graph_def.pb.
   with tf.gfile.FastGFile(os.path.join(
@@ -109,16 +122,16 @@ def create_graph(FLAGS):
     _ = tf.import_graph_def(graph_def, name='')
 
 
-def run_inference_on_image(file_name):
+def run_inference_on_image(image):
   """Runs inference on an image.
   Args:
     image: Image file name.
   Returns:
     Nothing
   """
-  if not tf.gfile.Exists(file_name):
-    tf.logging.fatal('File does not exist %s', file_name)
-  image_data = tf.gfile.FastGFile(file_name, 'rb').read()
+  if not tf.gfile.Exists(image):
+    tf.logging.fatal('File does not exist %s', image)
+  image_data = tf.gfile.FastGFile(image, 'rb').read()
 
   # Creates graph from saved GraphDef.
   create_graph()
@@ -143,50 +156,82 @@ def run_inference_on_image(file_name):
     top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
 
     # Print output to screen and write to file
-    if os.environ.get('_tapisExecSystemOutputDir') is None:
+    outputDir = os.environ.get('_tapisExecSystemOutputDir')
+    if outputDir is None:
       outputPath = '/tmp/output.txt'
     else:
         outputPath = os.path.expandvars('${_tapisSysRootDir}/${_tapisExecSystemOutputDir}/output.txt')
+    print('Using output path: %s\n' % outputPath)
     f = open(outputPath, "a")
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
+      print('%s (score = %.5f)\n' % (human_string, score))
       f.write('%s (score = %.5f)\n' % (human_string, score))
     f.close()
 
 
-def download_and_extract_model(FLAGS):
+def maybe_download_and_extract():
   """Download and extract model tar file."""
-  filename=os.path.basename(FLAGS.model)
-  try:
-    os.makedirs(FLAGS.model_dir, exist_ok=True)
-    filepath = os.path.join(FLAGS.model_dir, filename)
-    with tarfile.open(filepath, 'r:gz') as tar:
-      tar.extractall(FLAGS.model_dir)
-  except Exception as e:
-    #print(f"Error downloading or extracting model:{e}")
-    print("Error downloading or extracting model: {}".format(e))
+  dest_directory = FLAGS.model_dir
+  if not os.path.exists(dest_directory):
+    os.makedirs(dest_directory)
+  filename = DATA_URL.split('/')[-1]
+  filepath = os.path.join(dest_directory, filename)
+  if not os.path.exists(filepath):
+    def _progress(count, block_size, total_size):
+      sys.stdout.write('\r>> Downloading %s %.1f%%' % (
+          filename, float(count * block_size) / float(total_size) * 100.0))
+      sys.stdout.flush()
+    filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath, _progress)
+    print()
+    statinfo = os.stat(filepath)
+    print('Successfully downloaded', filename, statinfo.st_size, 'bytes.')
+  tarfile.open(filepath, 'r:gz').extractall(dest_directory)
 
 
 def main(_):
+  maybe_download_and_extract()
   file_name = 'image.jpg'
 
   with open(file_name, 'wb') as f:
     f.write(requests.get(FLAGS.image_file).content)
-  
-  download_and_extract_model()
-  run_inference_on_image(file_name)
-  
-  parser = argparse.ArgumentParser()
 
-  parser.add_argument('--model_dir', type=str, default='/tmp/imagenet', help="""\ Path to classify_image_graph_def.pb,imagenet_synset_to_human_label_map.txt, and imagenet_2012_challenge_label_map_proto.pbtxt.\ """)
-  parser.add_argument('--image_file', type=str, default='', help='Absolute path to image file.')
-  parser.add_argument('--num_top_predictions', type=int, default=5, help='Display this many predictions.')
-  parser.add_argument('--model', type=str, default='http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz', help='default model')
-
-  FLAGS, _ = parser.parse_known_args()
-  tf.app.run(main=main, argv=[sys.argv[0]] + _)
+  image = file_name
+  # image = (FLAGS.image_file if FLAGS.image_file else
+  #          os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
+  run_inference_on_image(image)
 
 
 if __name__ == '__main__':
-  main()
+  parser = argparse.ArgumentParser()
+  # classify_image_graph_def.pb:
+  #   Binary representation of the GraphDef protocol buffer.
+  # imagenet_synset_to_human_label_map.txt:
+  #   Map from synset ID to a human readable string.
+  # imagenet_2012_challenge_label_map_proto.pbtxt:
+  #   Text representation of a protocol buffer mapping a label to synset ID.
+  parser.add_argument(
+      '--model_dir',
+      type=str,
+      default='/tmp/imagenet',
+      help="""\
+      Path to classify_image_graph_def.pb,
+      imagenet_synset_to_human_label_map.txt, and
+      imagenet_2012_challenge_label_map_proto.pbtxt.\
+      """
+  )
+  parser.add_argument(
+      '--image_file',
+      type=str,
+      default='',
+      help='Absolute path to image file.'
+  )
+  parser.add_argument(
+      '--num_top_predictions',
+      type=int,
+      default=5,
+      help='Display this many predictions.'
+  )
+  FLAGS, unparsed = parser.parse_known_args()
+  tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
