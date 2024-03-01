@@ -1,4 +1,5 @@
 import argparse, csv, os
+import constants
 
 from typing import List, Tuple
 from typing_extensions import TypedDict
@@ -63,27 +64,25 @@ def store_results(results: AnalysisResult) -> None:
     """
     
     #if there was no sentence provided, prints this message, else prints the results
-    with open(
-        os.path.join(os.environ.get("_tapisExecSystemOutputDir", ""), 'results.csv'),
-        mode='a',
-        newline=''
-    ) as file:
+    with open(constants.DEFAULT_OUTPUT_FILE_PATH, mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["SENTENCE","POSITIVE", "NEGATIVE"])
+        labels = [label_data['label'] for _, analysis in results for label_data in analysis]
+        labels.insert(0,"SENTENCE")
+        writer.writerow(labels)
         for sentence, analysis in results:
-            writer.writerow([
-                sentence, 
-                next(filter(lambda analysis: analysis["label"] == "POSITIVE", analysis)),
-                next(filter(lambda analysis: analysis["label"] == "NEGATIVE", analysis)),
-            ])
+            scores = ['%.3f' % label_data['score'] for label_data in analysis]
+            writer.writerow(
+                [sentence] + scores)
     
 def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--sentences', type=str, nargs="+", help='Sentence for analyzing.')
-    parser.add_argument('--model', type=str, default='', help='Optional model name')
     parser.add_argument('--files', type=str, nargs="+", help='File(s) upon which to run sentiment analysis')
-
+    parser.add_argument('--model', default='j-hartmann/emotion-english-distilroberta-base', type=str, nargs='?', help='choose from the following models',
+                        required=False,
+                        choices=['j-hartmann/emotion-english-distilroberta-base','checkpoint','distilbert/distilbert-base-uncased-finetuned-sst-2-english']
+                        )
     # args = parser.parse_args()
     
     flags, _ = parser.parse_known_args()

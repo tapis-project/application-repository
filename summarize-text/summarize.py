@@ -1,4 +1,6 @@
-import argparse, os, requests, sys
+import argparse, os, requests
+
+import constants
 
 from bs4 import BeautifulSoup
 from transformers import pipeline
@@ -8,6 +10,10 @@ def url_to_file(flags) -> str:
     '''
     Write the URL contents to a file 
     '''
+    
+    if flags.url == None:
+        pass
+    
     #Get content
     content = requests.get(flags.url).text
     soup = BeautifulSoup(content, 'html.parser')
@@ -25,7 +31,6 @@ def url_to_file(flags) -> str:
     with open(f"./file_inputs/url_as_file.txt", "w", encoding="utf-8") as file:
         file.write(content)
     
-    
 def summarize(flags) -> str:
     '''
     Summarize the text.
@@ -41,8 +46,6 @@ def summarize(flags) -> str:
         '''
     
     text = flags.text
-    min_len = flags.min
-    max_len = flags.max
     model = flags.model
     file = flags.file
     url = flags.url
@@ -80,8 +83,6 @@ def summarize(flags) -> str:
 
 def write_to_file(summary_result):
     """
-    Writes a string into a file
-
     Args:
         input_string:   The string to be written to a file
         filename:       The destiantion file path for the string
@@ -89,21 +90,14 @@ def write_to_file(summary_result):
     Returns:
         None
     """
-    output_filename = os.path.join(
-        os.environ.get(
-            "_tapisExecSystemOutputDir",
-            "saved_outputs"
-        ),
-        "summary.txt"
-    )
         
     try:
-        os.makedirs(os.path.dirname(output_filename), exist_ok=True)
-        with open(output_filename, 'w') as file:
+        os.makedirs(os.path.dirname(constants.DEFAULT_OUTPUT_FILE_PATH), exist_ok=True)
+        with open(constants.DEFAULT_OUTPUT_FILE_PATH, 'w') as file:
             file.write(summary_result)
-        print("Output written to", output_filename)
+        print("Output written to", constants.DEFAULT_OUTPUT_FILE_PATH)
     except IOError:
-        print("Error writing to file", output_filename)
+        print("Error writing to file", constants.DEFAULT_OUTPUT_FILE_PATH)
         
 
 def main():
@@ -118,14 +112,19 @@ def main():
     
     parser.add_argument('--text', type=str, help='This is the text that needs to be summarized.')
     parser.add_argument('--url', type=str, help='URL that can be summarized. ** NOTE this feature is limited to only lite sites with text only.')
-    parser.add_argument('--min', default=3, type=int, help='this is the minimum characters to be used in the summary.')
-    parser.add_argument('--max', default=5, type=int, help='this is the maximum characters to be used in the summary.')
-    parser.add_argument('--model', default='t5-base', type=str, help='select your model type. Default is t5-base.')
     parser.add_argument('--file', type=str, help='files to be added intead of statement')
+    parser.add_argument('--model', default='t5-base', type=str, nargs='?', help='choose from the following models',
+                        required=False,
+                        choices=['t5-base','checkpoint','Falconsai/text_summarization']
+                        )
+
     flags, _ = parser.parse_known_args()
 
     #print(summary)
-    url_to_file(flags)
+    try:
+        url_to_file(flags)
+    except:
+        pass
     write_to_file(summarize(flags))
 
 
