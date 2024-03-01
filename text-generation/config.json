@@ -1,0 +1,16 @@
+{
+    "fileOutputDirs": {
+        "tapisOutPutDir":"_tapisExecSystemOutputDir",
+        "localOutputDir": "/text-generator-files"
+    },
+    
+    "outputFilename": "output.txt",
+    "maxOutput": 1000,
+    "sequence": 2,
+
+    "models": {
+        "defaultModeldistilgpt2": "distilgpt2",
+        "checkpointModel": "checkpoint",
+        "microsoftPhi2": "microsoft/phi-2"
+    }
+}

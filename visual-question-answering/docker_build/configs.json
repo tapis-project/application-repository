@@ -1,0 +1,8 @@
+{
+    "fileOutputDirs": {
+        "tapisOutPutDir":"_tapisExecSystemOutputDir",
+        "localOutputDir": "results_folder"
+    },
+    
+    "outputFilename": "results_file.csv"
+}

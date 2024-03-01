@@ -1,0 +1,36 @@
+{   
+    "id": "tapis_ml_suite",
+    "version": "dev",
+    "description": "Machine Learning Suite of Hugging Face Apps",
+    "owner": "afields",
+    "enabled": true,
+    "runtime": "SINGULARITY",
+    "runtimeOptions": ["SINGULARITY_RUN"],
+    "containerImage": "docker://taccafields/ml_suite:dev",
+    "jobType": "BATCH",
+    "maxJobs": 1000,
+    "maxJobsPerUser": 900,
+    "jobAttributes": {
+        "execSystemId": "afsystem_id_hpc2",
+        "nodeCount": 2,
+        "coresPerNode": 2,
+        "maxMinutes": 10,
+        "parameterSet": {
+            "appArgs": [
+                {
+                    "name": "python3",
+                    "arg": "python3 /src/main.py",
+                    "inputMode": "FIXED",
+                    "notes": {}
+                },
+                {
+                    "name": "Pipeline_Name",
+                    "arg": null,
+                    "inputMode": "REQUIRED",
+                    "notes": {}
+                }
+            ]
+        }
+    }
+    
+}

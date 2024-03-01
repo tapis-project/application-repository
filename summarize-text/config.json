@@ -1,0 +1,18 @@
+{
+    "fileOutputDirs": {
+        "tapisOutPutDir":"_tapisExecSystemOutputDir",
+        "localOutputDir": "/saved_outputs"
+    },
+    
+    "outputFilename": "summary.txt",
+    
+    "summaryCharacters": {
+        "min":1,
+        "max":1000
+    },
+
+    "model": {
+        "defaultModelt5Base": "t5-base",
+        "checkpointModel": "checkpoint"
+    }
+}

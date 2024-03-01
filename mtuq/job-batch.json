@@ -1,0 +1,57 @@
+{
+    "name": "mtuq-batch-1.0",
+    "description": "MTUQ Containerized; Runs batch",
+    "appId": "mtuq-batch",
+    "appVersion": "1.0",
+    "archiveOnAppError": false,
+    "nodeCount": 4,
+    "coresPerNode": 1,
+    "jobType": "BATCH",
+    "memoryMB": 4000,
+    "maxMinutes": 25,
+    "isMpi": true,
+    "fileInputs": [
+      {
+        "name": "Python Script to be run",
+        "sourceUrl": "tapis://Frontera.exec/scratch1/09052/jacksont/DetailedAnalysis.py",
+        "targetPath": "entrypoint.py",
+        "description": "Script Path. In the format: tapis://Frontera.exec/scratch1/<num>/<user>/<script>.py ",
+        "autoMountLocal": true
+      }
+    ],
+    "fileInputArrays": [],
+    "parameterSet": {
+      "appArgs": [
+        {
+          "arg": "python3 entrypoint.py",
+          "description": "Do not change",
+          "include": true,
+          "name": "python run command"
+        }
+      ],
+      "containerArgs": [],
+      "schedulerOptions": [
+        {
+          "name": "allocation",
+          "description": "allocation",
+          "include": true,
+          "arg": ""
+        }
+      ],
+      "archiveFilter": {
+        "includes": [],
+        "excludes": [],
+        "includeLaunchFiles": false
+      },
+      "envVariables": [
+        {
+          "key": "SYNGINE_CACHE",
+          "value": "syngine_cache"
+        },
+        {
+          "key": "TERM",
+          "value": "xterm-256color"
+        }
+      ]
+    }
+}
