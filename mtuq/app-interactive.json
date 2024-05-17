@@ -6,7 +6,7 @@
     "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
-    "containerImage": "docker://jthet/mtuq:latest",
+    "containerImage": "docker://ghcr.io/seisscoped/mtuq:ubuntu20.04",
     "strictFileInputs": false,
     "jobAttributes": {
       "description": "MTUQ Job Attributes",
