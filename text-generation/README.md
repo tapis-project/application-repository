@@ -47,3 +47,8 @@ Output written to text-generator/output.txt
 Once upon a time of opportunity, it is impossible to explain the difference between this belief and a belief that is held up by other individuals. And of
 Once upon a time when America's middle classes have been under such intense pressure, their government doesn't want it. They want it. They want it
 ```
+
+## Note:
+```
+As of right now, TACC uses pretrained, default models from huggingface. The text generated from these models is not reflecting of TACC. Please be aware that the generation of text may be unpredictable and may have language that some may find insensitive or inappropriate. User discretion is advised.  
+```
