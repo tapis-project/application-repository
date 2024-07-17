@@ -1,4 +1,4 @@
-#image tapis/sentiment-analysis:0.1
+#image tapis/sentiment-analysis:1.0.1
 
 FROM huggingface/transformers-pytorch-cpu:4.18.0
 

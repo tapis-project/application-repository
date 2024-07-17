@@ -10,7 +10,7 @@ This folder can be used to build docker images in order to run `sentiment_analys
 ## Running the image:
 To run the image, run this command:
 ```bash
-$ docker run tapis/sentiment-analysis:0.1 <arguments>
+$ docker run tapis/sentiment-analysis:1.0.1 <arguments>
 ```
 There are multiple arguments built into this application. Here are your options:
 |Arguments|Explanation|Options|Example|
@@ -20,7 +20,7 @@ There are multiple arguments built into this application. Here are your options:
 |return all scores|Choose to either return all or only one score. Anything other than f or false is considered as true. Capitalization does not matter. (Optional since the default is "True")|f, false, true|--return_all_scores='false'| 
 > Example of running the image with all arguments:
 > ```bash
-> $ docker run tapis/sentiment-analysis:0.1 --sentences 'I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
+> $ docker run tapis/sentiment-analysis:1.0.1 --sentences 'I love potatoes' --model='j-hartmann/emotion-english-distilroberta-base' --return_all_scores='f'
 > ```
 > Output:
 > ```
@@ -43,16 +43,16 @@ Will allow the results, in csv format, to be saved onto the machine. File name i
 ## Pulling the image:
 To pull the existing image, run this command:
 ```bash
-$ docker pull tapis/sentiment-analysis:0.1
+$ docker pull tapis/sentiment-analysis:1.0.1
 ```
-If done properly, ``tapis/sentiment-analysis`` should show up with the tag ``0.1`` when running this command:
+If done properly, ``tapis/sentiment-analysis`` should show up with the tag ``1.0.1`` when running this command:
 ```bash
 $ docker images
 ```
 > The output should look similar to this:
 > ```
 > REPOSITORY                 TAG    IMAGE ID       CREATED         SIZE
-> tapis/sentiment-analysis   0.1    d8276d24fa21   2 hours ago     897MB
+> tapis/sentiment-analysis   1.0.1  d8276d24fa21   2 hours ago     897MB
 > ```
 
 ## Building the image:
