@@ -1,6 +1,6 @@
 {
-  "name": "basic-shell-script-job",
-  "appId": "<username>-basic-shell-script",
+  "name": "basic-shell-script-job-batch-zip",
+  "appId": "<username>-basic-shell-script-batch-zip",
   "appVersion": "0.1",
   "execSystemId": "<system name>",
   "parameterSet": {

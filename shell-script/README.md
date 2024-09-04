@@ -1,6 +1,29 @@
 # shell-script
 
-Application that runs a basic shell script on an HPC cluster.
+Application examples that run a basic shell script on an HPC cluster using an application *jobType* of **BATCH** or
+on a single host using a *jobType* of **FORK**. This directory contains examples and instructions for five
+different combinations of application *jobType* and *runtime*. Each example is in a separate subdirectory.
+The combinations are:
+
+- Subdirectory fork_docker: FORK jobType and DOCKER runtime
+- Subdirectory fork_singularity: FORK jobType and SINGULARITY runtime
+- Subdirectory fork_zip: FORK jobType and ZIP runtime
+- Subdirectory batch_singularity: BATCH jobType and SINGULARITY runtime
+- Subdirectory batch_zip: BATCH jobType and ZIP runtime.
+
+Each subdirectory contains files that can be used as starting templates for an application and a job
+submission request. Note that an application id must be unique. When not creating an application
+for general use, it is a good idea to use a naming scheme likely to result in a unique id. For example, as indicated in
+the provided application json files, a username may be included as part of the id.
+
+The subdirectory **docker_build** contains instructions for building the docker image used in the examples.
+The subdirectory **zip_build** contains instructions for building the zip archive used in the examples.
+
+The file **sys_exec.json** shows a Tapis system definition that can be used as a starting template for creating
+an execution system in Tapis. Note that this template is based on a test VM used by the TACC Tapis development
+team. It is set up to support running both FORK and BATCH type jobs using a runtime of DOCKER, SINGULARITY or ZIP.
+In particular, note that the queues (aka partitions) defined for the system must match the HPC queues on the
+HPC cluster. Remember to register credentials for the Tapis system after you create it.
 
 ## Details
 
@@ -9,19 +32,21 @@ one environment variable to be set. The output can be found in the output direct
 definition. If no output directory is defined in the application then the default is
 *execSystemOutputDir=${JobWorkingDir}/jobs/${JobUUID}/output*.
 
+
+
 For more information on running jobs in Tapis please see the
 [documentation](https://tapis.readthedocs.io/en/latest/technical/jobs.html).
 
 ## Using the basic shell script application
 
-Use the _app_definition.json_ file as a reference for creating the application. Simply download the file
-or copy its contents and [create the application](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
+Use the desired _app_definition.json_ file from one of the subdirectories as a reference for creating the application.
+Simply download the file or copy its contents and [create the application](https://tapis.readthedocs.io/en/latest/technical/apps.html#creating-an-application).
 
 Note that an application id must be unique, so in general it is a good idea to use a naming scheme likely to result
 in a unique id. For example, it is common to include a username as part of the id.
 
 To run the application on a specific system instead of a publicly shared one, users can add the *execSystemId*
-attribute under the *jobAttributes* section in the app definition:
+attribute under the *jobAttributes* section in the app definition. For example:
 
 ```
 {

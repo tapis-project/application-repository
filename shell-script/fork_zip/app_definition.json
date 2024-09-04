@@ -1,0 +1,35 @@
+{
+  "id": "<username>-basic-shell-script-fork-zip",
+  "version": "0.1",
+  "description": "A basic shell script application packaged as a ZIP archive and run using FORK.",
+  "jobType": "FORK",
+  "runtime": "ZIP",
+  "containerImage": "/tmp/shell_script.tgz",
+  "jobAttributes": {
+    "parameterSet": {
+      "appArgs": [
+        {
+          "arg": "arg1",
+          "name": "appArg1Name",
+          "description": "description for app arg 1",
+          "inputMode": "FIXED",
+          "notes": { "arg1note": "my first arg" }
+        },
+        {
+          "arg": "arg2",
+          "name": "appArg2Name",
+          "description": "description for app arg 2",
+          "inputMode": "FIXED",
+          "notes": { "arg2note": "my 2nd arg" }
+        }
+      ],
+      "envVariables": [
+        {
+          "key": "MY_ENV1",
+          "value": "env_1_value",
+          "description": "my env var #1"
+        }
+      ]
+    }
+  }
+}

@@ -1,11 +1,10 @@
 {
-  "id": "<username>-basic-shell-script",
+  "id": "<username>-basic-shell-script-fork-docker",
   "version": "0.1",
-  "description": "A basic shell script application run using Singularity in batch mode.",
-  "jobType": "BATCH",
-  "runtime": "SINGULARITY",
-  "runtimeOptions": ["SINGULARITY_RUN"],
-  "containerImage": "docker://tapis/basic-shell-script-app:0.1",
+  "description": "A basic shell script application run using Docker in FORK mode.",
+  "jobType": "FORK",
+  "runtime": "DOCKER",
+  "containerImage": "tapis/basic-shell-script-app:0.1",
   "jobAttributes": {
     "parameterSet": {
       "appArgs": [
@@ -31,10 +30,6 @@
         "description": "my env var #1"
       }
       ]
-    },
-    "memoryMB": 1,
-    "nodeCount": 1,
-    "coresPerNode": 1,
-    "maxMinutes": 10
+    }
   }
 }
