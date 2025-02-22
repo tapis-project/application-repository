@@ -6,7 +6,7 @@
   "jobType": "BATCH",
   "runtime": "SINGULARITY",
   "runtimeOptions": ["SINGULARITY_RUN"],
-  "containerImage": "docker://jthet/mspass-tapis:1.0",
+  "containerImage": "docker://ghcr.io/mspass-team/mspass:tacc",
   "strictFileInputs": false,
   "jobAttributes": {
     "description": "MsPASS Job Attributes",
