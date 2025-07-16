@@ -1,7 +1,11 @@
-#image jaeestee/sentiment-analysis:0.2
-FROM huggingface/transformers-pytorch-cpu:4.18.0
+FROM python:3.12
 
-#copy the application into the app folder
-COPY analyze_sentiment.py /app/analyze_sentiment.py
+RUN pip install transformers
+RUN pip install 'transformers[torch]'
 
-ENTRYPOINT ["/app/analyze_sentiment.py"]
+# copy the application into the app folder
+COPY . /app
+RUN chmod +x /app/analyze_sentiment.py
+
+ENTRYPOINT ["python3", "/app/analyze_sentiment.py"]
+# ENTRYPOINT ["python3", "-c", "print('hello world')"]

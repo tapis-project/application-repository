@@ -1,0 +1,6 @@
+{
+  "name": "basic-shell-script-job-fork-singularity",
+  "appId": "<username>-basic-shell-script-fork-singularity",
+  "appVersion": "0.1",
+  "execSystemId": "<system name>"
+}

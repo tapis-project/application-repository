@@ -38,7 +38,8 @@
     "envVariables": [
       {
         "key": "TERM",
-        "value": "xterm-256color"
+        "value": "xterm-256color",
+        "description": "TERM"
       }
     ]
   }

@@ -1,0 +1,6 @@
+{
+  "name": "basic-shell-script-job-fork-zip",
+  "appId": "<username>-basic-shell-script-fork-zip",
+  "appVersion": "0.1",
+  "execSystemId": "<system name>"
+}

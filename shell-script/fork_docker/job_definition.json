@@ -1,0 +1,6 @@
+{
+  "name": "basic-shell-script-job-fork-docker",
+  "appId": "<username>-basic-shell-script-fork-docker",
+  "appVersion": "0.1",
+  "execSystemId": "<system name>"
+}

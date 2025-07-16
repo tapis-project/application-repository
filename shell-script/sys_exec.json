@@ -1,0 +1,34 @@
+{
+  "id": "<userid>-exec-test",
+  "description": "Linux execution system",
+  "systemType": "LINUX",
+  "host": "<host name or IP address>",
+  "defaultAuthnMethod": "PKI_KEYS",
+  "rootDir": "/home/testuser",
+  "canExec": true,
+  "canRunBatch": true,
+  "jobRuntimes": [
+   { "runtimeType": "DOCKER" },
+   { "runtimeType": "SINGULARITY" },
+   { "runtimeType": "ZIP" }
+  ],
+  "jobWorkingDir": "workdir",
+  "batchScheduler": "SLURM",
+  "batchLogicalQueues": [
+    {
+      "name": "tapisNormal",
+      "hpcQueueName": "debug",
+      "maxJobs": 50,
+      "maxJobsPerUser": 10,
+      "minNodeCount": 1,
+      "maxNodeCount": 16,
+      "minCoresPerNode": 1,
+      "maxCoresPerNode": 68,
+      "minMemoryMB": 1,
+      "maxMemoryMB": 16384,
+      "minMinutes": 1,
+      "maxMinutes": 60
+    }
+  ],
+  "batchDefaultLogicalQueue": "tapisNormal"
+}

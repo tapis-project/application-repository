@@ -1,6 +1,6 @@
 import json, os
 
-with open("config.json", "r") as f:
+with open("/app/config.json", "r") as f:
     configs = json.load(f)
 
 # DIRECTORY 

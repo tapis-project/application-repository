@@ -81,7 +81,11 @@ def main():
     parser.add_argument('--files', type=str, nargs="+", help='File(s) upon which to run sentiment analysis')
     parser.add_argument('--model', default='j-hartmann/emotion-english-distilroberta-base', type=str, nargs='?', help='choose from the following models',
                         required=False,
-                        choices=['j-hartmann/emotion-english-distilroberta-base','checkpoint','distilbert/distilbert-base-uncased-finetuned-sst-2-english']
+                        choices=[
+                            'distilbert/distilbert-base-uncased-finetuned',
+                            'j-hartmann/emotion-english-distilroberta-base',
+                            'checkpoint',
+                            ]
                         )
     # args = parser.parse_args()
     
