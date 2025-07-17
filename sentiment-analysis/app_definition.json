@@ -5,7 +5,7 @@
     "jobType": "BATCH",
     "runtime": "SINGULARITY",
     "runtimeOptions": ["SINGULARITY_RUN"],
-    "containerImage": "docker://tapis/sentiment-analysis:2.0.0",
+    "containerImage": "docker://tapis/sentiment-analysis:2.0.2",
     "jobAttributes": {
         "parameterSet": {
             "archiveFilter": { 

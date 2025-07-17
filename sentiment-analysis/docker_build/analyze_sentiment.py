@@ -79,7 +79,7 @@ def main():
 
     parser.add_argument('--sentences', type=str, nargs="+", help='Sentence for analyzing.')
     parser.add_argument('--files', type=str, nargs="+", help='File(s) upon which to run sentiment analysis')
-    parser.add_argument('--output-filepath', type=str, nargs="1", help='The file path inside of the container to write the results to')
+    parser.add_argument('--output-filepath', type=str, nargs=1, help='The file path inside of the container to write the results to')
     parser.add_argument(
         '--model',
         default=DEFAULT_MODEL,

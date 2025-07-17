@@ -10,7 +10,9 @@
             {"arg": "--return_all_scores"},
             {"arg": "<True/False>"},
             {"arg": "--model"},
-            {"arg": "<Model>"}
+            {"arg": "<Model>"},
+            {"arg": "--output-filepath"},
+            {"arg": "/some/output/path"}
         ]
     }
 }
