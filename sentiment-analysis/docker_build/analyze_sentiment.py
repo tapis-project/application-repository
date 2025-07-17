@@ -1,5 +1,4 @@
 import argparse, csv, os
-import constants
 
 from typing import List, Tuple
 from typing_extensions import TypedDict
@@ -55,7 +54,7 @@ def analyze(flags) -> AnalysisResult:
     print(results)
     return results
 
-def store_results(results: AnalysisResult) -> None:
+def store_results(results: AnalysisResult, path: str) -> None:
     """
     Function that stores the results into a csv file.
 
@@ -64,7 +63,7 @@ def store_results(results: AnalysisResult) -> None:
     """
     
     #if there was no sentence provided, prints this message, else prints the results
-    with open(constants.DEFAULT_OUTPUT_FILE_PATH, mode='a', newline='') as file:
+    with open(path, mode='a', newline='') as file:
         writer = csv.writer(file)
         labels = [label_data['label'] for _, analysis in results for label_data in analysis]
         labels.insert(0,"SENTENCE")
@@ -79,18 +78,26 @@ def main():
 
     parser.add_argument('--sentences', type=str, nargs="+", help='Sentence for analyzing.')
     parser.add_argument('--files', type=str, nargs="+", help='File(s) upon which to run sentiment analysis')
-    parser.add_argument('--model', default='j-hartmann/emotion-english-distilroberta-base', type=str, nargs='?', help='choose from the following models',
-                        required=False,
-                        choices=[
-                            'distilbert/distilbert-base-uncased-finetuned',
-                            'j-hartmann/emotion-english-distilroberta-base',
-                            'checkpoint',
-                            ]
-                        )
-    # args = parser.parse_args()
+    parser.add_argument('--output-filepath', type=str, nargs="1", help='The file path inside of the container to write the results to')
+    parser.add_argument(
+        '--model',
+        default='j-hartmann/emotion-english-distilroberta-base',
+        type=str,
+        nargs='?',
+        help='choose from the following models',
+        required=False,
+        choices=[
+            'distilbert/distilbert-base-uncased-finetuned',
+            'j-hartmann/emotion-english-distilroberta-base',
+            'checkpoint',
+        ]
+    )
     
     flags, _ = parser.parse_known_args()
-    store_results(analyze(flags))
+
+    output_filepath = flags.output_filepath if flags.output_filepath else "/results"
+    
+    store_results(analyze(flags), output_filepath)
 
 if __name__ == '__main__':
     main()
