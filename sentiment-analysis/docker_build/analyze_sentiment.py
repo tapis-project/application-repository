@@ -62,8 +62,8 @@ def store_results(results: AnalysisResult, path: str) -> None:
         results (List): The results of the analysis.
     """
     
-    #if there was no sentence provided, prints this message, else prints the results
-    with open(path, mode='a', newline='') as file:
+    # if there was no sentence provided, prints this message, else prints the results
+    with open(path, mode='w', newline='') as file:
         writer = csv.writer(file)
         labels = [label_data['label'] for _, analysis in results for label_data in analysis]
         labels.insert(0,"SENTENCE")
@@ -74,6 +74,7 @@ def store_results(results: AnalysisResult, path: str) -> None:
                 [sentence] + scores)
     
 def main():
+    DEFAULT_MODEL = "j-hartmann/emotion-english-distilroberta-base"
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--sentences', type=str, nargs="+", help='Sentence for analyzing.')
@@ -81,14 +82,13 @@ def main():
     parser.add_argument('--output-filepath', type=str, nargs="1", help='The file path inside of the container to write the results to')
     parser.add_argument(
         '--model',
-        default='j-hartmann/emotion-english-distilroberta-base',
+        default=DEFAULT_MODEL,
         type=str,
         nargs='?',
         help='choose from the following models',
         required=False,
         choices=[
-            'distilbert/distilbert-base-uncased-finetuned',
-            'j-hartmann/emotion-english-distilroberta-base',
+            DEFAULT_MODEL,
             'checkpoint',
         ]
     )
