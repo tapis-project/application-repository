@@ -25,6 +25,15 @@
                     "arg": "--login-port 63210"
                 }
             ],
+        "schedulerOptions": [
+            {
+            "name": "TACC Allocation",
+            "description": "The TACC Allocation associated with this job execution",
+            "include": true,
+            "arg": ""
+
+            }
+        ],
         "envVariables": [
             {
                 "key": "APPTAINER_CACHEDIR",
