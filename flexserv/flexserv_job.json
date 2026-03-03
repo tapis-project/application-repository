@@ -1,0 +1,44 @@
+{
+    "name": "tap_flexserv_vista_test",
+    "appId": "FlexServ-vista-nairr",
+    "appVersion": "1.3.0",
+    "execSystemId": "vista-test-nairr",
+    "tenant": "public",
+    "execSystemLogicalQueue": "gh",
+    "maxMinutes": 60,
+    "parameterSet": {
+        "appArgs": [
+                {
+                    "name": "flexServPort",
+                    "arg": "--flexserv-port 8000"
+                },
+                {
+                    "name": "flexServSecret",
+                    "arg": "--secret flexserv"
+                },
+                {
+                    "name": "modelName",
+                    "arg": "--model-name Qwen/Qwen3-0.6B"
+                },
+                {
+                    "name": "loginPort",
+                    "arg": "--login-port 63210"
+                }
+            ],
+        "schedulerOptions": [
+            {
+            "name": "TACC Allocation",
+            "description": "The TACC Allocation associated with this job execution",
+            "include": true,
+            "arg": ""
+
+            }
+        ],
+        "envVariables": [
+            {
+                "key": "APPTAINER_CACHEDIR",
+                "value": "HOST_EVAL($SCRATCH)/.singularity'"
+            }   
+        ]
+    }
+}
