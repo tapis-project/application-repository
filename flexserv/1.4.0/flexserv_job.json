@@ -48,26 +48,17 @@
     "envVariables": [
       {
         "key": "PRI_MODEL_HOST",
-        "notes": "{}",
-        "value": "HOST_EVAL($SCRATCH)/flexserv/models",
-        "include": true,
-        "description": null
+        "value": "HOST_EVAL($SCRATCH)/flexserv/models"
       },
       {
         "key": "PUB_MODEL_HOST",
-        "notes": "{}",
-        "value": "/work/projects/aci/cic/models",
-        "include": true,
-        "description": null
+        "value": "/work/projects/aci/cic/models"
       }
     ],
     "schedulerOptions": [
       {
         "arg": "--tapis-profile tacc-apptainer",
-        "name": "TACC Scheduler Profile",
-        "notes": "{}",
-        "include": null,
-        "description": "Scheduler profile for HPC clusters at TACC"
+        "name": "TACC Scheduler Profile"
       }
     ]
   },
