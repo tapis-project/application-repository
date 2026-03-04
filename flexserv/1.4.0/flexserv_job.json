@@ -10,111 +10,42 @@
     "appArgs": [
       {
         "arg": "--flexserv-port 8000",
-        "name": "flexServPort",
-        "notes": "{}",
-        "include": null,
-        "description": "The port on which the FlexServ server will listen. If not specified, it will default to 8000. If any conflict occurs with the port you specified, our bootloader will automatically select another available port and you can check job logs to see which port is actually used."
+        "name": "flexServPort"
       },
       {
         "arg": "--model-name Qwen/Qwen2.5-Coder-0.5B",
-        "name": "modelName",
-        "notes": "{}",
-        "include": null,
-        "description": "The name of the default model to be used by the FlexServ server."
+        "name": "modelName"
       },
       {
         "arg": "--enable-https",
-        "name": "enableHttps",
-        "notes": "{}",
-        "include": null,
-        "description": "Enable HTTPS for the FlexServ server."
+        "name": "enableHttps"
       },
       {
         "arg": "--device auto",
-        "name": "device",
-        "notes": "{}",
-        "include": null,
-        "description": "Device backend hint (default: auto)."
+        "name": "device"
       },
       {
         "arg": "--dtype bfloat16",
-        "name": "dtype",
-        "notes": "{}",
-        "include": null,
-        "description": "Model dtype passed to backend (default: bfloat16)."
+        "name": "dtype"
       },
       {
         "arg": "--attn-implementation sdpa",
-        "name": "attnImplementation",
-        "notes": "{}",
-        "include": null,
-        "description": "Attention implementation passed to backend (default: sdpa)."
+        "name": "attnImplementation"
       },
       {
         "arg": "--model-timeout 86400",
-        "name": "modelTimeout",
-        "notes": "{}",
-        "include": null,
-        "description": "Model timeout seconds passed to backend (default: 86400)."
+        "name": "modelTimeout"
       },
       {
         "arg": "--quantization none",
-        "name": "quantization",
-        "notes": "{}",
-        "include": null,
-        "description": "Quantization mode passed to backend (default: none)."
+        "name": "quantization"
       },
       {
         "arg": "--is-distributed 0",
-        "name": "isDistributed",
-        "notes": "{}",
-        "include": null,
-        "description": "Indicates whether the FlexServ server should run in distributed mode. 0 is on single node, 1 is on multiple nodes. If not specified, it will default to 0 (single node)."
+        "name": "isDistributed"
       }
     ],
     "envVariables": [
-      {
-        "key": "APPTAINER_CACHEDIR",
-        "notes": "{}",
-        "value": "/work/projects/aci/cic/apps/flexserv/singularity_cache",
-        "include": true,
-        "description": "Apptainer cache directory."
-      },
-      {
-        "key": "ENABLE_GATEWAY",
-        "notes": "{}",
-        "value": "true",
-        "include": true,
-        "description": "Enable gateway mode (default: true)."
-      },
-      {
-        "key": "FLEXSERV_BACKEND_TYPE",
-        "notes": "{}",
-        "value": "transformers",
-        "include": true,
-        "description": "Backend type (default: transformers)."
-      },
-      {
-        "key": "FLEXSERV_VENV",
-        "notes": "{}",
-        "value": "/app/venvs/flexserv",
-        "include": true,
-        "description": "Venv path in container for backend/gateway startup."
-      },
-      {
-        "key": "GATEWAY_BACKEND_PORT",
-        "notes": "{}",
-        "value": "8001",
-        "include": true,
-        "description": "Gateway internal backend port."
-      },
-      {
-        "key": "GATEWAY_PORT",
-        "notes": "{}",
-        "value": "8000",
-        "include": true,
-        "description": "Gateway public port. Usually matches --flexserv-port."
-      },
       {
         "key": "PRI_MODEL_HOST",
         "notes": "{}",
