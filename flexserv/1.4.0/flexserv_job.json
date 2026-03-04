@@ -59,6 +59,12 @@
       {
         "arg": "--tapis-profile tacc-apptainer",
         "name": "TACC Scheduler Profile"
+      },
+      {
+        "name": "TACC Allocation",
+        "description": "The TACC Allocation associated with this job execution",
+        "include": true,
+        "arg": "-A TACC-ACI-CIC"
       }
     ]
   },
