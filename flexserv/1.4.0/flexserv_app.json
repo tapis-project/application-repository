@@ -54,7 +54,7 @@
           "name": "loginPort",
           "description": "The port to use for login, if specified, we will forcibly use this port for the login node and set up port forwarding from the compute node to this port. If not specified, we will have TAP functions select a port and you have to check job logs to see which port is used for login.",
           "inputMode": "INCLUDE_ON_DEMAND",
-          "arg": "--login-port 63334",
+          "arg": "--login-port 63210",
           "notes": {}
         },
         {
@@ -125,9 +125,23 @@
       ],
       "envVariables": [
         {
+          "key": "APPTAINER_CACHEDIR",
+          "notes": "{}",
+          "value": "/work/projects/aci/cic/apps/flexserv/singularity_cache",
+          "include": true,
+          "description": "Apptainer cache directory."
+        },
+        {
           "key": "HUGGINGFACE_TOKEN",
           "value": "",
           "description": "Token for accessing Hugging Face models, especially for the models that requires permission to download/use from HuggingFace. This is identical to HF_TOKEN",
+          "inputMode": "INCLUDE_ON_DEMAND",
+          "notes": {}
+        },
+        {
+          "key": "FLEXSERV_TOKEN",
+          "value": "",
+          "description": "Optional fixed startup token. If empty, TAP token is used.",
           "inputMode": "INCLUDE_ON_DEMAND",
           "notes": {}
         },
@@ -153,25 +167,32 @@
           "notes": {}
         },
         {
-          "key": "GATEWAY_PORT",
-          "value": "8080",
-          "description": "Gateway public port. Usually matches --flexserv-port.",
-          "inputMode": "INCLUDE_ON_DEMAND",
-          "notes": {}
-        },
-        {
           "key": "GATEWAY_BACKEND_PORT",
+          "notes": "{}",
           "value": "8001",
-          "description": "Gateway internal backend port.",
-          "inputMode": "INCLUDE_ON_DEMAND",
-          "notes": {}
+          "include": true,
+          "description": "Gateway internal backend port."
         },
         {
-          "key": "FLEXSERV_TOKEN",
-          "value": "",
-          "description": "Optional fixed startup token. If empty, TAP token is used.",
-          "inputMode": "INCLUDE_ON_DEMAND",
-          "notes": {}
+          "key": "GATEWAY_PORT",
+          "notes": "{}",
+          "value": "8000",
+          "include": true,
+          "description": "Gateway public port. Usually matches --flexserv-port."
+        },
+        {
+          "key": "PRI_MODEL_HOST",
+          "notes": "{}",
+          "value": "HOST_EVAL($SCRATCH)/flexserv/models",
+          "include": true,
+          "description": null
+        },
+        {
+          "key": "PUB_MODEL_HOST",
+          "notes": "{}",
+          "value": "/work/projects/aci/cic/models",
+          "include": true,
+          "description": null
         }
       ],
       "archiveFilter": {
