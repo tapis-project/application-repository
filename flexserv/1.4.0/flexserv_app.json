@@ -1,6 +1,5 @@
 {
-  "tenant": "tacc",
-  "id": "FlexServ-vista-wzhang217",
+  "id": "FlexServ-vista-nairr",
   "version": "1.4.0",
   "description": "A TACC-owned inference server for running AI models.",
   "owner": "${apiUserId}",
