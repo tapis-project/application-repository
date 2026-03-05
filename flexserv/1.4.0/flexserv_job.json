@@ -61,10 +61,14 @@
         "name": "TACC Scheduler Profile"
       },
       {
+        "arg": "--tacc-allocation GHTapis+Nairr_testing",
+        "name": "TACC Allocation"
+      },
+      {
         "name": "TACC Allocation",
         "description": "The TACC Allocation associated with this job execution",
         "include": true,
-        "arg": ""
+        "arg": "-A TACC-ACI-CIC"
       }
     ]
   },
