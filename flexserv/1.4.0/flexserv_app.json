@@ -1,6 +1,6 @@
 {
   "id": "FlexServ-vista-nairr",
-  "version": "1.4.1",
+  "version": "1.4.0",
   "description": "A TACC-owned inference server for running AI models.",
   "owner": "${apiUserId}",
   "enabled": true,
@@ -108,6 +108,18 @@
           "description": "Set the slurm job name to be identical to the Tapis job name.",
           "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--job-name ${JobName}"
+        },
+        {
+          "name": "TACC Resource Allocation",
+          "description": "Set the TACC resource allocation for the job.",
+          "inputMode": "REQUIRED",
+          "arg": ""
+        },
+        {
+          "name": "Reservation Name",
+          "description": "Set the reservation name for the job.",
+          "inputMode": "REQUIRED",
+          "arg": ""
         }
       ],
       "envVariables": [
@@ -119,7 +131,7 @@
         },
         {
           "key": "HUGGINGFACE_TOKEN",
-          "value": "",
+          "value": "hf_xxx",
           "description": "Token for accessing Hugging Face models, especially for the models that requires permission to download/use from HuggingFace. This is identical to HF_TOKEN",
           "inputMode": "INCLUDE_ON_DEMAND"
         },
