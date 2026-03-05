@@ -81,18 +81,18 @@
           "name": "modelTimeout",
           "description": "Model timeout seconds passed to backend (default: 86400).",
           "inputMode": "INCLUDE_ON_DEMAND",
-          "arg": "--model-timeout 86400"
+          "arg": "--model-timeout 186400"
         },
         {
           "name": "quantization",
           "description": "Quantization mode passed to backend (default: none).",
-          "inputMode": "INCLUDE_ON_DEMAND",
-          "arg": "--quantization bnb-4bit"
+          "inputMode": "REQUIRED",
+          "arg": "--quantization none"
         },
         {
           "name": "isDistributed",
           "description": "Indicates whether the FlexServ server should run in distributed mode. 0 is on single node, 1 is on multiple nodes. If not specified, it will default to 0 (single node).",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--is-distributed 0"
         }
       ],
@@ -100,20 +100,20 @@
         {
           "name": "TACC Scheduler Profile",
           "description": "Scheduler profile for HPC clusters at TACC",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--tapis-profile tacc-apptainer"
         },
         {
           "name": "Slurm job name",
           "description": "Set the slurm job name to be identical to the Tapis job name.",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--job-name ${JobName}"
         }
       ],
       "envVariables": [
         {
           "key": "APPTAINER_CACHEDIR",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "value": "/work/projects/aci/cic/apps/flexserv/singularity_cache",
           "description": "Apptainer cache directory."
         },
@@ -125,9 +125,9 @@
         },
         {
           "key": "FLEXSERV_TOKEN",
-          "value": "",
+          "value": "flexserv",
           "description": "Optional fixed startup token. If empty, TAP token is used.",
-          "inputMode": "INCLUDE_ON_DEMAND"
+          "inputMode": "REQUIRED"
         },
         {
           "key": "FLEXSERV_BACKEND_TYPE",
