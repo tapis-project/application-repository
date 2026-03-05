@@ -61,16 +61,15 @@
         "name": "TACC Scheduler Profile"
       },
       {
-        "arg": "--reservation GHTapis+Nairr_testing",
-        "name": "TACC Reservation for NAIRR testing"
+	"name": "Reservation Name",
+        "arg": "--reservation GHTapis+Nairr_testing"
       },
       {
-        "name": "TACC Allocation",
+        "name": "TACC Resource Allocation",
         "description": "The TACC Allocation associated with this job execution",
         "include": true,
-        "arg": "-A <allocation>"
+        "arg": "-A << allocation >>"
       }
     ]
-  },
-  "visible": true
+  }
 }
