@@ -162,13 +162,13 @@
         {
           "key": "PRI_MODEL_HOST",
           "value": "HOST_EVAL($SCRATCH)/flexserv/models",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "description": "Directory path for Private models. This applies to the $PRI_MODEL_REPO variable used in the app, it will be replaced with this path when the job is running. You can upload your private models to this directory and specify the model name (which is the subdirectory name under this directory) as the input to the app to use those models."
         },
         {
           "key": "PUB_MODEL_HOST",
           "value": "/work/projects/aci/cic/models",
-          "inputMode": "FIXED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "description": "Directory path for Public models. This applies to the $PUB_MODEL_REPO variable used in the app, it will be replaced with this path when the job is running. We will have some commonly used models stored in this directory for users to use, and you can also upload your models to this directory if you want to share them with other users. Similar to PRI_MODEL_HOST, you can specify the model name (which is the subdirectory name under this directory) as the input to the app to use those models."
         }
       ],
