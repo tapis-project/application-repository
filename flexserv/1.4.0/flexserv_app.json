@@ -32,7 +32,7 @@
         {
           "name": "flexServPort",
           "description": "The port on which the FlexServ server will listen. If not specified, it will default to 8000. If any conflict occurs with the port you specified, our bootloader will automatically select another available port and you can check job logs to see which port is actually used.",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--flexserv-port 8000"
         },
         {
@@ -44,8 +44,8 @@
         {
           "name": "modelName",
           "description": "The name of the default model to be used by the FlexServ server.",
-          "inputMode": "INCLUDE_ON_DEMAND",
-          "arg": "--model-name Qwen/Qwen3-0.6B"
+          "inputMode": "INCLUDE_BY_DEFAULT",
+          "arg": "--model-name Qwen/Qwen3.5-0.8B"
         },
         {
           "name": "loginPort",
@@ -56,37 +56,37 @@
         {
           "name": "enableHttps",
           "description": "Enable HTTPS for the FlexServ server.",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--enable-https"
         },
         {
           "name": "device",
           "description": "Device backend hint (default: auto).",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--device auto"
         },
         {
           "name": "dtype",
           "description": "Model dtype passed to backend (default: bfloat16).",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--dtype bfloat16"
         },
         {
           "name": "attnImplementation",
           "description": "Attention implementation passed to backend (default: sdpa).",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--attn-implementation sdpa"
         },
         {
           "name": "modelTimeout",
           "description": "Model timeout seconds passed to backend (default: 86400).",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--model-timeout 186400"
         },
         {
           "name": "quantization",
           "description": "Quantization mode passed to backend (default: none).",
-          "inputMode": "REQUIRED",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "arg": "--quantization none"
         },
         {
@@ -107,7 +107,7 @@
           "name": "Slurm job name",
           "description": "Set the slurm job name to be identical to the Tapis job name.",
           "inputMode": "INCLUDE_BY_DEFAULT",
-          "arg": "--job-name ${JobName}"
+          "arg": "--job-name tap_${JobName}"
         },
         {
           "name": "TACC Resource Allocation",
@@ -139,36 +139,36 @@
           "key": "FLEXSERV_TOKEN",
           "value": "flexserv",
           "description": "Optional fixed startup token. If empty, TAP token is used.",
-          "inputMode": "REQUIRED"
+          "inputMode": "INCLUDE_ON_DEMAND"
         },
         {
           "key": "FLEXSERV_BACKEND_TYPE",
           "value": "transformers",
           "description": "Backend type (default: transformers).",
-          "inputMode": "INCLUDE_ON_DEMAND"
+          "inputMode": "INCLUDE_BY_DEFAULT"
         },
         {
           "key": "FLEXSERV_VENV",
           "value": "/app/venvs/flexserv",
           "description": "Venv path in container for backend/gateway startup.",
-          "inputMode": "INCLUDE_ON_DEMAND"
+          "inputMode": "INCLUDE_BY_DEFAULT"
         },
         {
           "key": "ENABLE_GATEWAY",
           "value": "true",
           "description": "Enable gateway mode (default: true).",
-          "inputMode": "INCLUDE_ON_DEMAND"
+          "inputMode": "INCLUDE_BY_DEFAULT"
         },
         {
           "key": "GATEWAY_BACKEND_PORT",
           "value": "8001",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "description": "Gateway internal backend port."
         },
         {
           "key": "GATEWAY_PORT",
           "value": "8000",
-          "inputMode": "INCLUDE_ON_DEMAND",
+          "inputMode": "INCLUDE_BY_DEFAULT",
           "description": "Gateway public port. Usually matches --flexserv-port."
         },
         {
