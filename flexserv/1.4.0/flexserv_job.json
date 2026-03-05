@@ -62,7 +62,7 @@
       },
       {
         "arg": "--tacc-allocation GHTapis+Nairr_testing",
-        "name": "TACC Allocation"
+        "name": "TACC Reservation for NAIRR testing"
       },
       {
         "name": "TACC Allocation",
