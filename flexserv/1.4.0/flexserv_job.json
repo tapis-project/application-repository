@@ -53,6 +53,14 @@
       {
         "key": "PUB_MODEL_HOST",
         "value": "/work/projects/aci/cic/models"
+      },
+      {
+        "key": "APPLY_PATCH",
+        "value": "1"
+      },
+      {
+        "key": "APPTAINER_IMAGE",
+        "value": "docker://zhangwei217245/flexserv-transformers:1.4.0"
       }
     ],
     "schedulerOptions": [
@@ -61,7 +69,7 @@
         "name": "TACC Scheduler Profile"
       },
       {
-	"name": "Reservation Name",
+        "name": "Reservation Name",
         "arg": "--reservation GHTapis+Nairr_testing"
       },
       {
