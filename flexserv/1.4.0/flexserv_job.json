@@ -52,7 +52,7 @@
       },
       {
         "key": "PUB_MODEL_HOST",
-        "value": "/work/projects/aci/cic/models"
+        "value": "/work/projects/aci/cic/apps/flexserv/models"
       },
       {
         "key": "APPLY_PATCH",
