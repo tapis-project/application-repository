@@ -1,0 +1,90 @@
+{
+tenant: "public"
+id: "vista-test-nairr"
+description: "System for running jobs on the HPC system."
+systemType: "LINUX"
+owner: "kprice"
+host: "vista.tacc.utexas.edu"
+enabled: true
+effectiveUserId: "kprice"
+defaultAuthnMethod: "TMS_KEYS"
+rootDir: "/"
+port: 22
+useProxy: false
+proxyPort: -1
+canExec: true
+canRunBatch: true
+enableCmdPrefix: true
+allowChildren: false
+jobRuntimes: [
+0: {
+runtimeType: "SINGULARITY"
+}
+1: {
+runtimeType: "ZIP"
+}
+]
+jobWorkingDir: "HOST_EVAL($SCRATCH)/tapis/${JobUUID}"
+jobMaxJobs: 2147483647
+jobMaxJobsPerUser: 2147483647
+batchScheduler: "SLURM"
+batchLogicalQueues: [
+0: {
+name: "gg"
+hpcQueueName: "gg"
+maxJobs: -1
+maxJobsPerUser: 20
+minNodeCount: 1
+maxNodeCount: 32
+minCoresPerNode: 1
+maxCoresPerNode: 144
+minMemoryMB: 1
+maxMemoryMB: 256000
+minMinutes: 1
+maxMinutes: 2880
+}
+1: {
+name: "gh-dev"
+hpcQueueName: "gh-dev"
+maxJobs: -1
+maxJobsPerUser: 1
+minNodeCount: 1
+maxNodeCount: 8
+minCoresPerNode: 1
+maxCoresPerNode: 72
+minMemoryMB: 1
+maxMemoryMB: 256000
+minMinutes: 1
+maxMinutes: 120
+}
+2: {
+name: "gh"
+hpcQueueName: "gh"
+maxJobs: -1
+maxJobsPerUser: 20
+minNodeCount: 1
+maxNodeCount: 64
+minCoresPerNode: 1
+maxCoresPerNode: 72
+minMemoryMB: 1
+maxMemoryMB: 256000
+minMinutes: 1
+maxMinutes: 2880
+}
+]
+batchDefaultLogicalQueue: "gh"
+batchSchedulerProfile: "tacc-apptainer"
+notes: {
+label: "Vista"
+}
+uuid: "c3c75436-967c-4a15-8219-89e1cf9602ff"
+deleted: false
+created: "2026-02-26T16:29:25.502489Z"
+updated: "2026-02-26T16:29:25.502489Z"
+hasCredentials: true
+isPublic: true
+isDynamicEffectiveUser: true
+sharedWithUsers: [
+0: "ajamthe"
+]
+}

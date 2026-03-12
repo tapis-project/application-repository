@@ -1,0 +1,84 @@
+{
+  "name": "tap_flexserv_vista_test",
+  "appId": "FlexServ-vista-nairr",
+  "appVersion": "1.4.0",
+  "execSystemId": "vista-test-nairr",
+  "tenant": "public",
+  "execSystemLogicalQueue": "gh",
+  "maxMinutes": 60,
+  "parameterSet": {
+    "appArgs": [
+      {
+        "arg": "--flexserv-port 8000",
+        "name": "flexServPort"
+      },
+      {
+        "arg": "--model-name Qwen/Qwen3.5-0.8B",
+        "name": "modelName"
+      },
+      {
+        "arg": "--enable-https",
+        "name": "enableHttps"
+      },
+      {
+        "arg": "--device auto",
+        "name": "device"
+      },
+      {
+        "arg": "--dtype bfloat16",
+        "name": "dtype"
+      },
+      {
+        "arg": "--attn-implementation sdpa",
+        "name": "attnImplementation"
+      },
+      {
+        "arg": "--model-timeout 86400",
+        "name": "modelTimeout"
+      },
+      {
+        "arg": "--quantization none",
+        "name": "quantization"
+      },
+      {
+        "arg": "--is-distributed 0",
+        "name": "isDistributed"
+      }
+    ],
+    "envVariables": [
+      {
+        "key": "PRI_MODEL_HOST",
+        "value": "HOST_EVAL($SCRATCH)/flexserv/models"
+      },
+      {
+        "key": "PUB_MODEL_HOST",
+        "value": "/work/projects/aci/cic/apps/flexserv/models"
+      },
+      {
+        "key": "APPLY_PATCH",
+        "value": "0"
+      },
+      {
+        "key": "APPTAINER_IMAGE",
+        "value": "/work/projects/aci/cic/apps/flexserv/zhangwei217245--flexserv-transformers--1.4.0.sif"
+      }
+    ],
+    "schedulerOptions": [
+      {
+        "arg": "--tapis-profile tacc-apptainer",
+        "name": "TACC Scheduler Profile"
+      },
+      {
+        "name": "Reservation Name",
+        "arg": "--reservation GHTapis+Nairr_testing",
+        "description": "This is optional. Fill only if you have a reservation and want to use it for this job."
+      },
+      {
+        "name": "TACC Resource Allocation",
+        "description": "The TACC Allocation associated with this job execution",
+        "include": true,
+        "arg": "-A << allocation >>"
+      }
+    ]
+  }
+}
