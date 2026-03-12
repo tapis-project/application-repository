@@ -56,11 +56,11 @@
       },
       {
         "key": "APPLY_PATCH",
-        "value": "1"
+        "value": "0"
       },
       {
         "key": "APPTAINER_IMAGE",
-        "value": "/work/projects/aci/cic/apps/flexserv/zhangwei217245--flexserv-transformers--1.4.1.sif"
+        "value": "/work/projects/aci/cic/apps/flexserv/zhangwei217245--flexserv-transformers--1.4.0.sif"
       }
     ],
     "schedulerOptions": [
@@ -70,7 +70,8 @@
       },
       {
         "name": "Reservation Name",
-        "arg": "--reservation GHTapis+Nairr_testing"
+        "arg": "--reservation GHTapis+Nairr_testing",
+        "description": "This is optional. Fill only if you have a reservation and want to use it for this job."
       },
       {
         "name": "TACC Resource Allocation",
