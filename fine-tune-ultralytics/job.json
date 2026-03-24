@@ -1,0 +1,14 @@
+{ 
+    "name": "ultralytics-fine-job",
+    "appId": "ultralytics-fine-tune",
+    "appVersion": "0.1",
+    "execSystemId": "vista-test-nairr",
+    "parameterSet": {
+      "schedulerOptions": [ { "name": "Allocation", "arg": "-A <insert here>" }, 
+         { "name": "Reservation", "arg": "--reservation <insert here>" }],
+      "envVariables":[{
+          "key": "EPOCHS",
+          "value": "100"
+      }]
+      
+}}

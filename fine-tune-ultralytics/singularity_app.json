@@ -1,0 +1,36 @@
+{
+    "id": "ultralytics-fine-tune",
+    "version": "0.1",
+    "description": "An app to fine-tune ultralytics Yolo using Singularity in batch mode.",
+    "jobType": "BATCH",
+    "runtime": "SINGULARITY",
+    "containerImage": "/work/projects/aci/cic/apps/ultralytics-fine-tune/Ultralytics_FT_Tapis_app.sif",
+    "jobAttributes": {
+        "execSystemExecDir": "${JobWorkingDir}/jobs/${JobUUID}",
+        "execSystemInputDir": "${JobWorkingDir}/jobs/${JobUUID}/data",
+        "execSystemOutputDir": "${JobWorkingDir}/jobs/${JobUUID}/output",
+        "parameterSet": {
+            "containerArgs": [
+            {
+                "name": "nvidia",
+                "inputMode": "FIXED",
+                "arg": "--nv",
+                "notes": {}
+            }
+            ],
+            "envVariables": [
+            {
+                "key": "EPOCHS",
+                "value": "3",
+                "description": "Number of epochs for the fine-tune job",
+                "inputMode": "REQUIRED",
+                "notes": {}
+            }
+            ],
+        "memoryMB": 1,
+        "nodeCount": 1,
+        "coresPerNode": 1,
+        "maxMinutes": 10
+    }
+    }   
+}
