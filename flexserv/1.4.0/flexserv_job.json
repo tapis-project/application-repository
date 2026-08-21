@@ -1,11 +1,11 @@
 {
   "name": "tap_flexserv_vista_test",
-  "appId": "FlexServ-vista-nairr",
+  "appId": "FlexServ-1.4.0",
   "appVersion": "1.4.0",
-  "execSystemId": "vista-test-nairr",
+  "execSystemId": "vista-tapis",
   "tenant": "public",
-  "execSystemLogicalQueue": "gh",
-  "maxMinutes": 60,
+  "execSystemLogicalQueue": "gh-dev",
+  "maxMinutes": 120,
   "parameterSet": {
     "appArgs": [
       {
@@ -41,6 +41,14 @@
         "name": "quantization"
       },
       {
+        "arg": "--trust-remote-code true",
+        "name": "trustRemoteCode"
+      },
+      {
+        "arg": "--continuous-batching true",
+        "name": "continuousBatching"
+      },
+      {
         "arg": "--is-distributed 0",
         "name": "isDistributed"
       }
@@ -53,25 +61,12 @@
       {
         "key": "PUB_MODEL_HOST",
         "value": "/work/projects/aci/cic/apps/flexserv/models"
-      },
-      {
-        "key": "APPLY_PATCH",
-        "value": "0"
-      },
-      {
-        "key": "APPTAINER_IMAGE",
-        "value": "/work/projects/aci/cic/apps/flexserv/zhangwei217245--flexserv-transformers--1.4.0.sif"
       }
     ],
     "schedulerOptions": [
       {
         "arg": "--tapis-profile tacc-apptainer",
         "name": "TACC Scheduler Profile"
-      },
-      {
-        "name": "Reservation Name",
-        "arg": "--reservation GHTapis+Nairr_testing",
-        "description": "This is optional. Fill only if you have a reservation and want to use it for this job."
       },
       {
         "name": "TACC Resource Allocation",

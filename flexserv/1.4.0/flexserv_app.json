@@ -1,9 +1,10 @@
 {
-  "id": "FlexServ-vista-nairr",
+  "id": "FlexServ-1.4.0",
   "version": "1.4.0",
   "description": "A TACC-owned inference server for running AI models.",
   "owner": "${apiUserId}",
   "enabled": true,
+  "isPublic": true,
   "runtime": "ZIP",
   "runtimeVersion": null,
   "runtimeOptions": [
@@ -90,6 +91,18 @@
           "arg": "--quantization none"
         },
         {
+          "name": "trustRemoteCode",
+          "description": "Whether to trust remote code execution (default: false).",
+          "inputMode": "INCLUDE_BY_DEFAULT",
+          "arg": "--trust-remote-code true"
+        },
+        {
+          "name": "continuousBatching",
+          "description": "Whether to enable continuous batching (default: false).",
+          "inputMode": "INCLUDE_BY_DEFAULT",
+          "arg": "--continuous-batching true"
+        },
+        {
           "name": "isDistributed",
           "description": "Indicates whether the FlexServ server should run in distributed mode. 0 is on single node, 1 is on multiple nodes. If not specified, it will default to 0 (single node).",
           "inputMode": "INCLUDE_BY_DEFAULT",
@@ -112,14 +125,14 @@
         {
           "name": "TACC Resource Allocation",
           "description": "Set the TACC resource allocation for the job.",
-          "inputMode": "REQUIRED",
-          "arg": ""
+          "inputMode": "INCLUDE_BY_DEFAULT",
+          "arg": "-A << allocation >>"
         },
         {
           "name": "Reservation Name",
           "description": "Set the reservation name for the job.",
           "inputMode": "INCLUDE_ON_DEMAND",
-          "arg": ""
+          "arg": "--reservation << reservation >>"
         }
       ],
       "envVariables": [
@@ -133,12 +146,6 @@
           "key": "HUGGINGFACE_TOKEN",
           "value": "hf_xxx",
           "description": "Token for accessing Hugging Face models, especially for the models that requires permission to download/use from HuggingFace. This is identical to HF_TOKEN",
-          "inputMode": "INCLUDE_ON_DEMAND"
-        },
-        {
-          "key": "FLEXSERV_TOKEN",
-          "value": "flexserv",
-          "description": "Optional fixed startup token. If empty, TAP token is used.",
           "inputMode": "INCLUDE_ON_DEMAND"
         },
         {
@@ -185,23 +192,26 @@
         }
       ],
       "archiveFilter": {
+        "includes": [],
+        "excludes": [],
         "includeLaunchFiles": true
-      },
-      "logConfig": {
-        "stdoutFilename": "",
-        "stderrFilename": ""
       }
     },
+    "fileInputs": [],
+    "fileInputArrays": [],
     "nodeCount": 1,
     "coresPerNode": 1,
     "memoryMB": 256000,
-    "maxMinutes": 10
+    "maxMinutes": 240,
+    "subscriptions": [],
+    "tags": []
   },
   "tags": [
     "appName: FlexServ"
   ],
   "notes": {
     "label": "FlexServ",
+    "hideNodeCountAndCoresPerNode": false,
     "category": "Utilities",
     "showTargetPath": true,
     "dynamicExecSystems": [
