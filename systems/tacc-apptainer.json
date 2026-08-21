@@ -1,0 +1,21 @@
+{
+    "name": "tacc-apptainer",
+    "description": "Default TACC Apptainer Scheduler Profile",
+    "moduleSpec": [
+        {
+            "moduleLoadCommand": "module load",
+            "modulesToLoad": [
+                "tacc-apptainer"
+            ]
+        },
+        {
+            "moduleLoadCommand": "module unload",
+            "modulesToLoad": [
+                "xalt"
+            ]
+        }
+    ],
+    "hiddenOptions": [
+        "MEM"
+    ]
+}
