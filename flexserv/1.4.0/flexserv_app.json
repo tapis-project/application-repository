@@ -91,7 +91,7 @@
                 },
                 {
                     "name": "attnImplementation",
-                    "description": "Optional qualified attention override: inherit, auto, eager, sdpa, flash_attention_2, flash_attention_3 or flash_attention_4. Auto uses SM-aware FA2/FA3 preferences and kernel probes. FA4 is explicit and has no Transformers paged-KV fast decode; Qwen3.5 hybrid batching requires SDPA.",
+                    "description": "Optional qualified attention override: inherit, auto, eager, sdpa, flash_attention_2, flash_attention_3 or flash_attention_4. Auto uses SM-aware FA2/FA3 preferences and kernel probes, including Qwen3.5 hybrid batching. On Hopper, qualified FA3 supports direct paged-KV decode for full-attention layers. FA4 is explicit and uses gathered KV without fast decode.",
                     "inputMode": "INCLUDE_BY_DEFAULT",
                     "arg": "--attn-implementation auto"
                 },
@@ -115,7 +115,7 @@
                 },
                 {
                     "name": "cbHybridCache",
-                    "description": "Hybrid paged cache policy: auto (default), off or qwen3.5. Auto detects supported unquantized dense Qwen3.5 with CB enabled on a single CUDA target. The text-only adapter requires SDPA; compile=true attempts tensor-region compilation, auto permits eager CB fallback. Graphs, prefix sharing, CPU offload and async batching remain disabled. GPU qualification pending.",
+                    "description": "Hybrid paged cache policy: auto (default), off or qwen3.5. Auto detects supported unquantized dense Qwen3.5 with CB enabled on a single CUDA target. The text-only adapter supports qualified FA2/FA3 with direct paged-KV decode, or gathered KV with SDPA/FA4. Recurrent histories remain independent. Compile=true attempts tensor-region compilation; auto permits eager CB fallback. Graphs, prefix sharing, CPU offload and async batching remain disabled. Target-GPU verification required.",
                     "inputMode": "INCLUDE_BY_DEFAULT",
                     "arg": "--cb-hybrid-cache auto"
                 },
@@ -124,6 +124,32 @@
                     "description": "Compilation policy: true, false, auto or inherit. On Qwen hybrid continuous batching, true attempts compilation and reports actual failures; auto attempts compilation with eager CB fallback; false disables it. Decode/prefill profile preferences permit fallback. Other models keep separate ordinary compile and cbCompileLevel controls. Balanced defaults to compilation off.",
                     "inputMode": "INCLUDE_ON_DEMAND",
                     "arg": "--compile false"
+                }
+            ],
+            "schedulerOptions": [
+                {
+                    "name": "TACC Scheduler Profile",
+                    "description": "Scheduler profile for HPC clusters at TACC",
+                    "inputMode": "INCLUDE_BY_DEFAULT",
+                    "arg": "--tapis-profile tacc-apptainer"
+                },
+                {
+                    "name": "Slurm job name",
+                    "description": "Set the slurm job name to be identical to the Tapis job name.",
+                    "inputMode": "INCLUDE_BY_DEFAULT",
+                    "arg": "--job-name tap_${JobName}"
+                },
+                {
+                    "name": "TACC Resource Allocation",
+                    "description": "Set the TACC resource allocation for the job.",
+                    "inputMode": "REQUIRED",
+                    "arg": ""
+                },
+                {
+                    "name": "Reservation Name",
+                    "description": "Set the reservation name for the job.",
+                    "inputMode": "INCLUDE_ON_DEMAND",
+                    "arg": ""
                 }
             ],
             "envVariables": [
