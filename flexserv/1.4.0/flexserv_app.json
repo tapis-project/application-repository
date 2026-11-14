@@ -79,7 +79,7 @@
                 },
                 {
                     "name": "servingProfile",
-                    "description": "Optional serving profile: auto, baseline, decode, prefill, memory or balanced. Auto uses balanced workload presets with model/hardware capability resolution. Python defaults to balanced when no argument or environment selection is supplied.",
+                    "description": "Optional serving profile: auto, baseline, decode, latency, extreme, prefill, memory or balanced. Latency (alias extreme) prioritizes single-request decoding: four concurrent slots, 512-token prompt chunks and static autotuned decode compilation. Auto uses balanced workload presets with model/hardware capability resolution. Profiles preserve dtype and require explicit quantization opt-in; numeric settings remain overridable.",
                     "inputMode": "INCLUDE_BY_DEFAULT",
                     "arg": "--serving-profile decode"
                 },
